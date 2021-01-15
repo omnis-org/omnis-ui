@@ -1,0 +1,7 @@
+######################
+####### NOTICE #######
+######################
+
+This product contains code from the repository
+https://github.com/akveo/ngx-admin
+under License MIT and Copyright (c) 2017 akveo.com
