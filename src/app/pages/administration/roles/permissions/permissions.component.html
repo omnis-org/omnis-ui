@@ -1,0 +1,6 @@
+<div class="wrapper">
+    <nb-checkbox [checked]="read" [disabled]="viewMode" (change)="check($event,1)">Read</nb-checkbox>
+    <nb-checkbox [checked]="insert" [disabled]="viewMode" (change)="check($event,2)">Create</nb-checkbox>
+    <nb-checkbox [checked]="update" [disabled]="viewMode" (change)="check($event,4)">Edit</nb-checkbox>
+    <nb-checkbox [checked]="delete" [disabled]="viewMode" (change)="check($event,8)">Delete</nb-checkbox>
+</div>

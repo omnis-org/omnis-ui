@@ -1,0 +1,19 @@
+/**
+ * @license
+ * Copyright OmnIS. All Rights Reserved.
+ * Licensed under the Apache License 2.0.
+ * See License in the project root for license information.
+ * And NOTICE.txt in the project root for notice information.
+ */
+
+@import './themes';
+
+@mixin nb-overrides() {
+  nb-select.size-medium button {
+    padding: 0.4375rem 2.2rem 0.4375rem 1.125rem !important;
+
+    nb-icon {
+      right: 0.41rem !important;
+    }
+  }
+}

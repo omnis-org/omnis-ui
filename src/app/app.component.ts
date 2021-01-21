@@ -1,10 +1,15 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: '<router-outlet></router-outlet>'
 })
-export class AppComponent {
-  title = 'omnis-ui';
+export class AppComponent implements OnInit {
+
+  constructor() {
+  }
+
+  ngOnInit(): void { }
+
 }

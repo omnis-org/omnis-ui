@@ -1,0 +1,17 @@
+/**
+ * @license
+ * Copyright OmnIS. All Rights Reserved.
+ * Licensed under the Apache License 2.0.
+ * See License in the project root for license information.
+ * And NOTICE.txt in the project root for notice information.
+ */
+
+@import '../styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install-component() {
+  .menu-sidebar ::ng-deep .scrollable {
+    padding-top: nb-theme(layout-padding-top);
+  }
+}

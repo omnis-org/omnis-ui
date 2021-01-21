@@ -28,6 +28,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/ionicons/scss/ionicons.scss",
+              "src/app/@theme/styles/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+              "node_modules/nebular-icons/scss/nebular-icons.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -66,7 +72,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "omnis-ui:build"
+            "browserTarget": "omnis-ui:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
