@@ -1,5 +1,10 @@
 # OmnisUi
 
+Omnis Web Interface
+
+[![Depfu](https://badges.depfu.com/badges/ea9ecbbec184051b4a1857946670e77d/overview.svg)](https://depfu.com/github/omnis-org/omnis-ui?project_id=18604)
+![GitHub](https://img.shields.io/github/license/omnis-org/omnis-ui)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
 
 ## Development server
