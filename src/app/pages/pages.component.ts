@@ -40,11 +40,12 @@ export class PagesComponent implements OnDestroy {
 
     this.accountService.role$.subscribe({
       next: role => {
-        pendingMachine.hidden = !role.pendingMachinesReadPermission;
-        administration.hidden = !role.rolesReadPermission && !role.usersReadPermission;
-        roles.hidden = !role.rolesReadPermission;
-        users.hidden = !role.usersReadPermission;
-
+        if (role != null) {
+          pendingMachine.hidden = !role.pendingMachinesReadPermission;
+          administration.hidden = !role.rolesReadPermission && !role.usersReadPermission;
+          roles.hidden = !role.rolesReadPermission;
+          users.hidden = !role.usersReadPermission;
+        }
       },
       error: error => {
         console.log(error);

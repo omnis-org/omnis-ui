@@ -23,7 +23,6 @@ import {
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbSecurityModule } from '@nebular/security';
 import { FooterComponent, HeaderComponent } from './components';
 import { OneColumnLayoutComponent } from './layouts/one-column.layout';
 
@@ -40,7 +39,6 @@ const NB_MODULES = [
   NbSearchModule,
   NbSidebarModule,
   NbContextMenuModule,
-  NbSecurityModule,
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
