@@ -7,7 +7,7 @@
  */
 
 import { Component } from '@angular/core';
-import { AlertService, RoleService } from '@core/services';
+import { AccountService, AlertService, RoleService } from '@core/services';
 import { LocalDataSource } from 'ng2-smart-table';
 import { PermissionsRenderComponent, PermissionsEditorComponent } from './permissions/permissions.component';
 
@@ -36,8 +36,10 @@ export class RolesComponent {
     },
     actions: {
       columnTitle: 'Actions',
-
-      position: 'right'
+      position: 'right',
+      add: true,
+      edit: true,
+      delete: true
     },
     columns: {
       id: {
@@ -95,7 +97,9 @@ export class RolesComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(public roleService: RoleService, private alertService: AlertService) { }
+  constructor(public roleService: RoleService,
+    private accountService: AccountService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     // only with activated when implemented
@@ -109,6 +113,10 @@ export class RolesComponent {
         }
       }
     );
+
+    this.settings.actions.add = this.accountService.role.rolesInsertPermission;
+    this.settings.actions.edit = this.accountService.role.rolesUpdatePermission;
+    this.settings.actions.delete = this.accountService.role.rolesDeletePermission;
   }
 
 
