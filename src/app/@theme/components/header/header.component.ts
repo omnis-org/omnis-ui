@@ -47,11 +47,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userMenu = [{ title: 'Profile', link: null }, { title: 'Log out', link: '/auth/logout' }];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private accountService: AccountService,
-              private layoutService: LayoutService) {
-  }
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private accountService: AccountService,
+    private layoutService: LayoutService) { }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
@@ -82,7 +81,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
-
     return false;
   }
 
@@ -90,6 +88,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
-
-
 }

@@ -64,8 +64,12 @@ export class PendingMachinesComponent {
       .pipe(first())
       .subscribe(pendingMachines => {
         this.source.load(pendingMachines);
-      }
-      );
+      });
+
+    if (!this.accountService.role.pendingMachinesUpdatePermission) {
+      this.settings.actions = null;
+    }
+
   }
 
   custom(event: any) {

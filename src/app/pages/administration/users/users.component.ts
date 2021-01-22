@@ -37,7 +37,10 @@ export class UsersComponent {
     },
     actions: {
       columnTitle: 'Actions',
-      position: 'right'
+      position: 'right',
+      add: true,
+      edit: true,
+      delete: true,
     },
     columns: {
       id: {
@@ -103,6 +106,12 @@ export class UsersComponent {
       this.settings.columns.roleId.editor.config.list = listRole;
       this.settings = Object.assign({}, this.settings);
     });
+
+
+    this.settings.actions.add = this.accountService.role.usersInsertPermission;
+    this.settings.actions.edit = this.accountService.role.usersUpdatePermission;
+    this.settings.actions.delete = this.accountService.role.usersDeletePermission;
+
   }
 
   onCreateConfirm(event) {
