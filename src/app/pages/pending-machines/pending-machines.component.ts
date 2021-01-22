@@ -69,7 +69,7 @@ export class PendingMachinesComponent {
   }
 
   custom(event: any) {
-    if (event.action === "authorize") {
+    if (event.action === 'authorize') {
       this.authorizeMachine(event.data);
     } else {
       this.unauthorizeMachine(event.data);

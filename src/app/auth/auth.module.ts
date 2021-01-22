@@ -11,10 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
-import { AuthRoutingModule } from './auth-routing.module'
+import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
-import { NbAuthBlockComponent } from './auth-block/auth-block.component'
+import { NbAuthBlockComponent } from './auth-block/auth-block.component';
 import { RegisterComponent } from './register/register.component';
 
 

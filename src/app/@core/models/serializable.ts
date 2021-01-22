@@ -10,8 +10,9 @@
 export class Serializable {
 
     fromJSON(json) {
-        for (var n in json)
+        for (const n in json) {
             this[n] = json[n];
+        }
         return this;
     }
 

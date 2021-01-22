@@ -8,8 +8,8 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsersComponent } from './users/users.component'
-import { RolesComponent } from './roles/roles.component'
+import { UsersComponent } from './users/users.component';
+import { RolesComponent } from './roles/roles.component';
 
 const routes: Routes = [
   {

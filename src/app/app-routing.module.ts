@@ -8,7 +8,7 @@
 
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AuthGuard } from '@core/guards'
+import { AuthGuard } from '@core/guards';
 
 export const routes: Routes = [
   {

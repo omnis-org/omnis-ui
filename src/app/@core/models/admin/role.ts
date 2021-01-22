@@ -7,8 +7,8 @@
  */
 
 
-import { Injectable } from "@angular/core";
-import { Serializable } from '../serializable'
+import { Injectable } from '@angular/core';
+import { Serializable } from '../serializable';
 
 @Injectable({ providedIn: 'root' })
 export class Role extends Serializable {

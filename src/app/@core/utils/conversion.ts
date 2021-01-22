@@ -8,7 +8,7 @@
 
 export function toInt(s) {
     if (typeof (s) === 'string') {
-        if (s === "") {
+        if (s === '') {
             return 0;
         } else {
             return parseInt(s, 10);

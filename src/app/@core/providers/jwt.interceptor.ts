@@ -28,14 +28,14 @@ export class JwtInterceptor implements HttpInterceptor {
 
 
         if (isServerUrl) {
-            var headers = new HttpHeaders({
+            let headers = new HttpHeaders({
                 'Content-Type': `application/json`
             });
 
             if (isLoggedIn) {
                 headers = new HttpHeaders({
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${userToken.token}`
+                    Authorization: `Bearer ${userToken.token}`
                 });
 
             }

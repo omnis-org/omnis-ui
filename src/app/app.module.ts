@@ -17,7 +17,7 @@ import { CoreModule } from './@core/core.module';
 import { NbMenuModule, NbSidebarModule } from '@nebular/theme';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccountService } from '@core/services';
-import { appInitializer, HttpErrorInterceptor, JwtInterceptor } from '@core/providers'
+import { appInitializer, HttpErrorInterceptor, JwtInterceptor } from '@core/providers';
 
 @NgModule({
   declarations: [

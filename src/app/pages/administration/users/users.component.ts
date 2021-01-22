@@ -89,17 +89,17 @@ export class UsersComponent {
     // only with activated when implemented
     this.accountService.getAll().subscribe(users => {
       users.forEach((_, i) => {
-        users[i].password = "";
-      })
+        users[i].password = '';
+      });
       this.source.load(users);
     });
 
-    const listRole = []
+    const listRole = [];
 
     this.roleService.getAll().subscribe(roles => {
       roles.forEach((v, _) => {
-        listRole.push({ value: v.id, title: v.name })
-      })
+        listRole.push({ value: v.id, title: v.name });
+      });
       this.settings.columns.roleId.editor.config.list = listRole;
       this.settings = Object.assign({}, this.settings);
     });
@@ -111,7 +111,7 @@ export class UsersComponent {
         next: data => {
           this.alertService.success('User added successfully');
           event.newData.id = data.id;
-          event.newData.password = "";
+          event.newData.password = '';
           event.confirm.resolve(event.newData);
         },
         error: error => {
@@ -127,7 +127,7 @@ export class UsersComponent {
       .subscribe({
         next: _ => {
           this.alertService.success('User updated successfully');
-          event.newData.password = "";
+          event.newData.password = '';
           event.confirm.resolve(event.newData);
         },
         error: error => {
