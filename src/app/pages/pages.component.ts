@@ -26,17 +26,17 @@ export class PagesComponent implements OnDestroy {
   menu: NbMenuItem[] = MENU_ITEMS;
 
   constructor(private accountService: AccountService) {
-    console.log("Page component");
+    console.log('Page component');
 
-    const pendingMachine = this.menu.filter(menu => menu.title == "Pending Machines")[0];
-    const administration = this.menu.filter(menu => menu.title == "Administration")[0]
-    const roles = administration.children.filter(child => child.title == "Roles")[0]
-    const users = administration.children.filter(child => child.title == "Users")[0]
+    const pendingMachine = this.menu.filter(menu => menu.title == 'Pending Machines')[0];
+    const administration = this.menu.filter(menu => menu.title == 'Administration')[0];
+    const roles = administration.children.filter(child => child.title == 'Roles')[0];
+    const users = administration.children.filter(child => child.title == 'Users')[0];
 
-    pendingMachine.hidden = true
-    administration.hidden = true
-    roles.hidden = true
-    users.hidden = true
+    pendingMachine.hidden = true;
+    administration.hidden = true;
+    roles.hidden = true;
+    users.hidden = true;
 
     this.accountService.role$.subscribe({
       next: role => {
@@ -50,11 +50,11 @@ export class PagesComponent implements OnDestroy {
       error: error => {
         console.log(error);
       }
-    })
+    });
   }
 
   ngOnDestroy() {
-    console.log("Destroy Page component");
+    console.log('Destroy Page component');
   }
 
 

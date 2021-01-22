@@ -62,7 +62,7 @@ export class NetworkService {
   }
 
   insert(network: OmnisNetwork) {
-    //insert new entry in database using rest api
+    // insert new entry in database using rest api
     return this.http.post<OmnisNetwork>(`${environment.omnisApiUrl}/network`, network)
       .pipe(tap(network => {
         const networks = this.networks; // get current local array state
@@ -72,7 +72,7 @@ export class NetworkService {
   }
 
   delete(id: string | number) {
-    //delete entry in database using rest api
+    // delete entry in database using rest api
     return this.http.delete(`${environment.omnisApiUrl}/network/${id}`)
       .pipe(tap(_ => {
         const networks = this.networks; // get current local array state

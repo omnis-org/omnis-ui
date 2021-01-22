@@ -47,10 +47,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userMenu = [{ title: 'Profile', link: null }, { title: 'Log out', link: '/auth/logout' }];
 
   constructor(private sidebarService: NbSidebarService,
-    private menuService: NbMenuService,
-    private themeService: NbThemeService,
-    private accountService: AccountService,
-    private layoutService: LayoutService) {
+              private menuService: NbMenuService,
+              private themeService: NbThemeService,
+              private accountService: AccountService,
+              private layoutService: LayoutService) {
   }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.accountService.user$.subscribe(user => {
       this.user = user;
-      this.userMenu[0].link = "user/edit/" + this.user?.id;
+      this.userMenu[0].link = 'user/edit/' + this.user?.id;
     });
 
     this.themeService.onThemeChange()

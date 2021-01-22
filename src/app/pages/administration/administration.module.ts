@@ -14,10 +14,10 @@ import { AdministrationComponent } from './administration.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { RolesComponent } from './roles/roles.component';
 import { UsersComponent } from './users/users.component';
-import { PermissionsRenderComponent, PermissionsEditorComponent } from './roles/permissions/permissions.component'
-import { RoleRenderComponent } from './users/role-render/role-render.component'
-import { AdministrationRoutingModule } from './administration-routing.module'
-import { PasswordEditorComponent } from './users/password-editor/password-editor.component'
+import { PermissionsRenderComponent, PermissionsEditorComponent } from './roles/permissions/permissions.component';
+import { RoleRenderComponent } from './users/role-render/role-render.component';
+import { AdministrationRoutingModule } from './administration-routing.module';
+import { PasswordEditorComponent } from './users/password-editor/password-editor.component';
 
 
 @NgModule({

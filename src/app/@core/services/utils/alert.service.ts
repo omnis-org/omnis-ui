@@ -16,19 +16,19 @@ export class AlertService {
     constructor(private toastrService: NbToastrService) { }
 
     success(message: string) {
-        this.alert("success", "Success", message);
+        this.alert('success', 'Success', message);
     }
 
     error(message: string) {
-        this.alert("danger", "Error", message);
+        this.alert('danger', 'Error', message);
     }
 
     info(message: string) {
-        this.alert("info", "Information", message);
+        this.alert('info', 'Information', message);
     }
 
     warn(message: string) {
-        this.alert("warning", "Warning", message);
+        this.alert('warning', 'Warning', message);
     }
 
     alert(type: NbComponentStatus, title: string, body: string) {

@@ -9,8 +9,8 @@
 import { Component } from '@angular/core';
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
-import { OmnisMachine, OmnisNetwork, OmnisInterface } from '../../../@core/models/omnis'
-import { MachineService, InterfaceService, NetworkService, GatewayService } from '../../../@core/services/omnis'
+import { OmnisMachine, OmnisNetwork, OmnisInterface } from '../../../@core/models/omnis';
+import { MachineService, InterfaceService, NetworkService, GatewayService } from '../../../@core/services/omnis';
 import { ElementRef, ViewChild } from '@angular/core';
 
 
@@ -27,9 +27,9 @@ import { ElementRef, ViewChild } from '@angular/core';
 export class NetworkMapComponent {
 
   @ViewChild('network') nwEl: ElementRef;
-  //the detailed object
+  // the detailed object
   object: OmnisMachine | OmnisNetwork;
-  //a local instance of machines
+  // a local instance of machines
   machines: OmnisMachine[];
   networks: OmnisNetwork[];
   typeOfSelectedObject: any;
@@ -64,7 +64,7 @@ export class NetworkMapComponent {
         const objectRawID = params.nodes[0];
         const objectType = this.visidToType(objectRawID);
         const objectID = this.visidToId(objectRawID);
-        //define selected type to show proper edit/detail menu
+        // define selected type to show proper edit/detail menu
         this.typeOfSelectedObject = objectType;
         if (objectType === 'client') {
           this.object = this.machines.find(m => m.id === objectID);
@@ -106,7 +106,7 @@ export class NetworkMapComponent {
   }
 
   updateNodes(data: any[], type: string): void {
-    if (data == null) { return; };
+    if (data == null) { return; }
 
     const nodesCurr = this.getNetworkNodes();
     const nodesCurrIds = nodesCurr.getIds();
@@ -147,7 +147,7 @@ export class NetworkMapComponent {
   }
 
   updateEdges(interfaces: OmnisInterface[]): void {
-    if (interfaces == null) { return; };
+    if (interfaces == null) { return; }
     const networkEdges = [];
 
     interfaces.forEach((interf: OmnisInterface) => {
@@ -157,7 +157,7 @@ export class NetworkMapComponent {
       });
     });
 
-    const dataset = new DataSet<any>(networkEdges);;
+    const dataset = new DataSet<any>(networkEdges);
     this.network.setData({ nodes: this.getNetworkNodes(), edges: dataset });
   }
 

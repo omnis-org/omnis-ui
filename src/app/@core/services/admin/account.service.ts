@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @license
  * Copyright OmnIS. All Rights Reserved.
  * Licensed under the Apache License 2.0.
@@ -167,7 +167,7 @@ export class AccountService {
     private processRole() {
         this.roleService.getById(this.user?.roleId).subscribe({
             next: r => {
-                const role = new Role()
+                const role = new Role();
                 role.fromJSON(r);
                 this.role_.next(role);
             },

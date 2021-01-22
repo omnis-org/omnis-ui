@@ -9,9 +9,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AlertService, LayoutService } from './utils'
-import { AccountService, RoleService } from './admin'
-import { GatewayService, InterfaceService, MachineService, NetworkService } from './omnis'
+import { AlertService, LayoutService } from './utils';
+import { AccountService, RoleService } from './admin';
+import { GatewayService, InterfaceService, MachineService, NetworkService } from './omnis';
 
 const SERVICES = [
   LayoutService,
