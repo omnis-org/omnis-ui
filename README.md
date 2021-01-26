@@ -2,6 +2,8 @@
 
 Omnis Web Interface
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/omnis-org/omnis-ui/CI)
+[![CodeFactor](https://www.codefactor.io/repository/github/omnis-org/omnis-ui/badge)](https://www.codefactor.io/repository/github/omnis-org/omnis-ui)
 [![Depfu](https://badges.depfu.com/badges/ea9ecbbec184051b4a1857946670e77d/overview.svg)](https://depfu.com/github/omnis-org/omnis-ui?project_id=18604)
 ![GitHub](https://img.shields.io/github/license/omnis-org/omnis-ui)
 
