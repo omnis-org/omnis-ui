@@ -7,20 +7,34 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbSidebarModule, NbToggleModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { NetworkMapComponent } from './network/network-map.component';
+import { NetworkMapComponent } from './network-map/network-map.component';
 import { MapComponent } from './map.component';
-
+import { SlideOutComponent } from './slide-out/slide-out.component';
+import { DetailsComponent } from './details/details-component';
+import { NetworkDetailsComponent } from './details/network/network-details.component';
+import { MachineDetailsComponent } from './details/machine/machine-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
+    NbLayoutModule,
     ThemeModule,
-    NbCardModule
+    NbCardModule,
+    NbSidebarModule,
+    NbButtonModule,
+    NbIconModule,
+    NbToggleModule,
+    ReactiveFormsModule
   ],
   exports: [],
   declarations: [
+    SlideOutComponent,
+    NetworkDetailsComponent,
+    MachineDetailsComponent,
+    DetailsComponent,
     MapComponent,
     NetworkMapComponent
   ],

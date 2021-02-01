@@ -6,7 +6,7 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
 import { OmnisMachine, OmnisNetwork, OmnisInterface } from '../../../@core/models/omnis';
@@ -17,23 +17,20 @@ import { ElementRef, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-network-map',
   styleUrls: ['./network-map.component.scss'],
-  template: `
-    <nb-card>
-      <nb-card-header>Maps</nb-card-header>
-      <div class="ncharts" id="network" #network></div>
-    </nb-card>
-  `,
+  template: `<div class="ncharts" id="network" #network></div>`,
 })
 export class NetworkMapComponent {
 
   @ViewChild('network') nwEl: ElementRef;
-  // the detailed object
-  object: OmnisMachine | OmnisNetwork;
-  // a local instance of machines
+  @Output() objectEvent = new EventEmitter<any>();
+  @Output() typeObjectEvent = new EventEmitter<string>();
+
+  //a local instance of machines
   machines: OmnisMachine[];
   networks: OmnisNetwork[];
-  typeOfSelectedObject: any;
+
   private network: any;
+
   constructor(
     private machineService: MachineService,
     private networkService: NetworkService,
@@ -64,12 +61,15 @@ export class NetworkMapComponent {
         const objectRawID = params.nodes[0];
         const objectType = this.visidToType(objectRawID);
         const objectID = this.visidToId(objectRawID);
-        // define selected type to show proper edit/detail menu
-        this.typeOfSelectedObject = objectType;
+        //define selected type to show proper edit/detail menu
+        this.typeObjectEvent.emit(objectType);
         if (objectType === 'client') {
-          this.object = this.machines.find(m => m.id === objectID);
+          console.log("client");
+          console.log(objectID);
+          this.objectEvent.emit(this.machines.find(m => m.id === objectID));
         } else if (objectType === 'network') {
-          this.object = this.networks.find(n => n.id === objectID);
+          console.log("network");
+          this.objectEvent.emit(this.networks.find(n => n.id === objectID));
         }
       }
       /**

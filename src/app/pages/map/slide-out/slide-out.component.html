@@ -1,0 +1,14 @@
+<nb-icon [icon]="'arrow-forward-outline'"
+         pack="eva"
+         class="show-hide-toggle"
+         *ngIf="open"
+         (click)="toggle()">
+</nb-icon>
+
+<div class="slide-out-container"
+     [class.expanded]="open"
+     [class.collapsed]="!open">
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
+</div>

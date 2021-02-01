@@ -1,0 +1,34 @@
+
+<form [formGroup]="form" (ngSubmit)="onSave()">
+    <div class="form-group">
+        <label class="label" for="uuid">UUID</label>
+        <input nbInput fullWidth type="text" formControlName="uuid" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="label" for="serialNumber">Serial Number</label>
+        <input nbInput fullWidth type="text" formControlName="serialNumber" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="label" for="hostname">Hostname</label>
+        <input nbInput fullWidth  type="text" formControlName="hostname" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="label" for="label">Label</label>
+        <input nbInput fullWidth  type="text" formControlName="label" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="label" for="description">Description</label>
+        <textarea nbInput fullWidth  type="text" formControlName="description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label class="label" for="virtualizationSystem">Virtualization System</label>
+        <input nbInput fullWidth  type="text" formControlName="virtualizationSystem" class="form-control"/>
+    </div>
+    <div class="form-group wrapper">
+        <button nbButton class="actionButton" [disabled]="loading" *ngIf="this.accountService.role.omnisUpdatePermission" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Save</button>
+
+        <button nbButton class="actionButton" [disabled]="loading2" *ngIf="this.accountService.role.omnisDeletePermission" type="button" (click)="onDelete()">
+        <span *ngIf="loading2" class="spinner-border spinner-border-sm mr-1"></span>Delete</button>
+    </div>
+</form>
