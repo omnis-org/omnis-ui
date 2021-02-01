@@ -36,7 +36,6 @@ export class PasswordEditorComponent extends DefaultEditor {
     }
 
     ngOnInit() {
-        console.log(this.cell.getRow());
         this.cell.newValue = '';
         if (this.cell.getRow().index == -1) {
             this.placeholderValue = 'Password';

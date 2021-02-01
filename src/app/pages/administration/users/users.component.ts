@@ -131,7 +131,6 @@ export class UsersComponent {
   }
 
   onSaveConfirm(event) {
-    console.log(event);
     this.accountService.update(event.data.id, event.newData)
       .subscribe({
         next: _ => {
