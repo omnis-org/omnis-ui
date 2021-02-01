@@ -1,0 +1,7 @@
+
+<ng-container *ngIf="object">
+    <h4>{{type | titlecase}} {{object.id}}</h4>
+</ng-container> 
+
+<app-network-details *ngIf="isNetwork" [network]="object" (delete)='onDelete()'></app-network-details>
+<app-machine-details *ngIf="isMachine" [machine]="object" (delete)='onDelete()'></app-machine-details>

@@ -1,1 +1,14 @@
-<app-network-map></app-network-map>
+<nb-card size="medium">
+    <nb-card-header>
+      <h3>Network Map</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="chart-container">
+        <app-network-map (objectEvent)="getObject($event)" (typeObjectEvent)="getTypeObject($event)"></app-network-map>
+      </div>
+    </nb-card-body>
+
+    <app-slide-out [(open)]="open">
+     <app-details [object]="object" [type]="typeObject" (delete)="onDelete()"></app-details>
+    </app-slide-out>
+  </nb-card>
