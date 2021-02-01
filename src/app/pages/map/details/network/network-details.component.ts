@@ -28,6 +28,7 @@ export class NetworkDetailsComponent implements OnInit, OnChanges {
     ngOnInit() {
         if (this.network !== undefined) {
             this.form = this.formBuilder.group({
+                id: ['', Validators.nullValidator],
                 name: ['', Validators.nullValidator],
                 ipv4: ['', Validators.nullValidator],
                 ipv4Mask: ['', Validators.nullValidator],

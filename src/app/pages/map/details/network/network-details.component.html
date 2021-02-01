@@ -12,10 +12,10 @@
         <input nbInput fullWidth  type="number" formControlName="ipv4Mask" class="form-control"/>
     </div>
     <div class="form-group">
-        <nb-toggle status="info" labelPosition="left">DMZ ?</nb-toggle>
+        <nb-toggle status="info" labelPosition="left" formControlName="isDmz">DMZ ?</nb-toggle>
     </div>
     <div class="form-group">
-        <nb-toggle status="info" labelPosition="left">WIFI ?</nb-toggle>
+        <nb-toggle status="info" labelPosition="left" formControlName="hasWifi">WIFI ?</nb-toggle>
     </div>
     <div class="form-group wrapper">
         <button nbButton class="actionButton" [disabled]="loading" *ngIf="this.accountService.role.omnisUpdatePermission" type="submit">
