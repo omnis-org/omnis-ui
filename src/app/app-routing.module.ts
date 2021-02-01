@@ -13,9 +13,9 @@ import { AuthGuard } from '@core/guards';
 export const routes: Routes = [
   {
     path: 'pages',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
