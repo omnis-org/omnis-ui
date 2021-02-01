@@ -64,11 +64,8 @@ export class NetworkMapComponent {
         //define selected type to show proper edit/detail menu
         this.typeObjectEvent.emit(objectType);
         if (objectType === 'client') {
-          console.log("client");
-          console.log(objectID);
           this.objectEvent.emit(this.machines.find(m => m.id === objectID));
         } else if (objectType === 'network') {
-          console.log("network");
           this.objectEvent.emit(this.networks.find(n => n.id === objectID));
         }
       }

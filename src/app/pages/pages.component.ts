@@ -26,8 +26,6 @@ export class PagesComponent implements OnDestroy {
   menu: NbMenuItem[] = MENU_ITEMS;
 
   constructor(private accountService: AccountService) {
-    console.log('Page component');
-
     const pendingMachine = this.menu.filter(menu => menu.title == 'Pending Machines')[0];
     const administration = this.menu.filter(menu => menu.title == 'Administration')[0];
     const roles = administration.children.filter(child => child.title == 'Roles')[0];
@@ -53,9 +51,7 @@ export class PagesComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    console.log('Destroy Page component');
-  }
+  ngOnDestroy() { }
 
 
 
