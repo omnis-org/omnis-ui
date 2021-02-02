@@ -81,6 +81,10 @@ export class GatewayService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisGateway[]>(`${environment.omnisApiUrl}/gateways/outdated/${day}`);
+  }
+
   private refreshTimer() {
     this.refreshTimeout = setTimeout(() => this.getAll().subscribe(), environment.refreshDataTimeout);
   }

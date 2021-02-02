@@ -81,6 +81,10 @@ export class TaggedMachineService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisTaggedMachine[]>(`${environment.omnisApiUrl}/taggedMachines/outdated/${day}`);
+  }
+
   private refreshTimer() {
     this.refreshTimeout = setTimeout(() => this.getAll().subscribe(), environment.refreshDataTimeout);
   }
