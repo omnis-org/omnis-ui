@@ -8,37 +8,23 @@
 
 import { NgModule } from '@angular/core';
 import {
-  NbActionsModule,
-  NbButtonModule,
   NbCardModule,
-  NbTabsetModule,
-  NbUserModule,
-  NbRadioModule,
-  NbSelectModule,
-  NbListModule,
-  NbIconModule,
 } from '@nebular/theme';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
-import { FormsModule } from '@angular/forms';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
   imports: [
-    FormsModule,
     ThemeModule,
     NbCardModule,
-    NbUserModule,
-    NbButtonModule,
-    NbTabsetModule,
-    NbActionsModule,
-    NbRadioModule,
-    NbSelectModule,
-    NbListModule,
-    NbIconModule
+    NgxChartsModule
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    PieChartComponent
   ],
 })
 export class DashboardModule { }

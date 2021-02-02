@@ -24,6 +24,7 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@nebular/eva-icons": "7.0.0",
     "@nebular/theme": "^7.0.0",
+    "@swimlane/ngx-charts": "^17.0.0",
     "bootstrap": "^4.6.0",
     "eva-icons": "^1.1.2",
     "ionicons": "2.0.1",
