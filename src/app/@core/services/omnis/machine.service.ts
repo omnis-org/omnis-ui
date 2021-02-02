@@ -8,7 +8,7 @@
 
 
 import { Injectable } from '@angular/core';
-import { OmnisMachine } from '@app/@core/models/omnis';
+import { OmnisMachine } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';

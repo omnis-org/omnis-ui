@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { OmnisGateway } from '@app/@core/models';
+import { OmnisGateway } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
