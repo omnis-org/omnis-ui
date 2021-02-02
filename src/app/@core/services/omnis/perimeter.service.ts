@@ -7,7 +7,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { OmnisPerimeter } from '@app/@core/models/omnis';
+import { OmnisPerimeter } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
