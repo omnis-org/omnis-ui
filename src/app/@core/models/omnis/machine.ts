@@ -6,6 +6,8 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
+import { Time } from "@angular/common";
+
 export class OmnisMachine {
     id: number;
     uuid: string;
@@ -15,9 +17,21 @@ export class OmnisMachine {
     description: string;
     virtualizationSystem: string;
     serialNumber: string;
+    machineType: string;
     perimeterId: number;
     locationId: number;
     operatingSystemId: number;
-    machineType: string;
     omnisVersion: string;
+    uuidLastModification: Time;
+    authorizedLastModification: Time;
+    hostnameLastModification: Time;
+    labelLastModification: Time;
+    descriptionLastModification: Time;
+    virtualizationSystemLastModification: Time;
+    serialNumberLastModification: Time;
+    machineTypeLastModification: Time;
+    perimeterIdLastModification: Time;
+    locationIdLastModification: Time;
+    operatingSystemIdLastModification: Time;
+    omnisVersionLastModification: Time;
 }

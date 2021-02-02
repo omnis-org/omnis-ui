@@ -6,6 +6,8 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
+import { Time } from "@angular/common";
+
 export class OmnisInterface {
     id: number;
     name: string;
@@ -15,4 +17,11 @@ export class OmnisInterface {
     interfaceType: string;
     machineId: number;
     networkId: number;
+    nameLastModification: Time;
+    ipv4LastModification: Time;
+    ipv4MaskLastModification: Time;
+    macLastModification: Time;
+    interfaceTypeLastModification: Time;
+    machineIdLastModification: Time;
+    networkIdLastModification: Time;
 }

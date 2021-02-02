@@ -6,6 +6,8 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
+import { Time } from "@angular/common";
+
 export class OmnisNetwork {
     id: number;
     name: string;
@@ -14,4 +16,10 @@ export class OmnisNetwork {
     isDmz: boolean;
     hasWifi: boolean;
     perimeterId: number;
+    nameLastModification: Time;
+    ipv4LastModification: Time;
+    ipv4MaskLastModification: Time;
+    isDmzLastModification: Time;
+    hasWifiLastModification: Time;
+    perimeterIdLastModification: Time;
 }
