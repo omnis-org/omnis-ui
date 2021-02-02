@@ -81,6 +81,10 @@ export class TagService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisTag[]>(`${environment.omnisApiUrl}/tags/outdated/${day}`);
+  }
+
   private refreshTimer() {
     this.refreshTimeout = setTimeout(() => this.getAll().subscribe(), environment.refreshDataTimeout);
   }

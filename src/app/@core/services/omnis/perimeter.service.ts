@@ -83,6 +83,10 @@ export class PerimeterService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisPerimeter[]>(`${environment.omnisApiUrl}/perimeters/outdated/${day}`);
+  }
+
   private refreshTimer() {
     this.refreshTimeout = setTimeout(() => this.getAll().subscribe(), environment.refreshDataTimeout);
   }

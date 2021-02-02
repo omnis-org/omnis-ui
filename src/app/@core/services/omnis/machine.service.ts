@@ -83,6 +83,10 @@ export class MachineService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisMachine[]>(`${environment.omnisApiUrl}/machines/outdated/${day}`);
+  }
+
 
   // ADMIN
 

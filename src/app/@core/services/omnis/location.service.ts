@@ -83,6 +83,10 @@ export class LocationService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisLocation[]>(`${environment.omnisApiUrl}/locations/outdated/${day}`);
+  }
+
   private refreshTimer() {
     this.refreshTimeout = setTimeout(() => this.getAll().subscribe(), environment.refreshDataTimeout);
   }

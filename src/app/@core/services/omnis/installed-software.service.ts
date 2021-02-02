@@ -81,6 +81,10 @@ export class InstalledSoftwareService {
       }));
   }
 
+  getOutdateds(day: number) {
+    return this.http.get<OmnisInstalledSoftware[]>(`${environment.omnisApiUrl}/installedSoftwares/outdated/${day}`);
+  }
+
   private refreshTimer() {
     this.refreshTimeout = setTimeout(() => this.getAll().subscribe(), environment.refreshDataTimeout);
   }
