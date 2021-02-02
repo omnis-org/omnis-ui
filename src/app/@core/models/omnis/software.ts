@@ -8,10 +8,12 @@
 
 import { Time } from "@angular/common";
 
-export class OmnisPerimeter {
+export class OmnisSoftware {
     id: number;
     name: string;
-    description: string;
+    version: string;
+    isIntern: boolean;
     nameLastModification: Time;
-    descriptionLastModification: Time;
+    versionLastModification: Time;
+    isInternLastModification: Time;
 }

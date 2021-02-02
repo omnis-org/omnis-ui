@@ -8,10 +8,16 @@
 
 import { Time } from "@angular/common";
 
-export class OmnisPerimeter {
+export class OmnisOperatingSystem {
     id: number;
     name: string;
-    description: string;
+    platform: string;
+    platformFamily: string;
+    platformVersion: string;
+    kernelVersion: string;
     nameLastModification: Time;
-    descriptionLastModification: Time;
+    platformLastModification: Time;
+    platformFamilyLastModification: Time;
+    platformVersionLastModification: Time;
+    kernelVersionLastModification: Time;
 }

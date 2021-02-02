@@ -8,10 +8,10 @@
 
 import { Time } from "@angular/common";
 
-export class OmnisPerimeter {
+export class OmnisTag {
     id: number;
     name: string;
-    description: string;
+    color: string;
     nameLastModification: Time;
-    descriptionLastModification: Time;
+    colorLastModification: Time;
 }
