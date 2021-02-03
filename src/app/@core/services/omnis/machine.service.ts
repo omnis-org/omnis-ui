@@ -25,8 +25,6 @@ export class MachineService {
   constructor(private http: HttpClient) {
     this.machines_ = new BehaviorSubject<OmnisMachine[]>(null);
     this.machines$ = this.machines_.asObservable();
-    // when the class is first called, fetch all data from api
-    this.getAll().subscribe();
   }
 
   public get machines(): OmnisMachine[] {

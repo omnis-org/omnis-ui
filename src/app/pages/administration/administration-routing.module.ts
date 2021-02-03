@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { RolesComponent } from './roles/roles.component';
+import { RolesResolver, UsersResolver } from '@app/@core/resolver';
 
 const routes: Routes = [
   {
@@ -18,10 +19,17 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
+        resolve: {
+          users: UsersResolver,
+          roles: RolesResolver
+        }
       },
       {
         path: 'roles',
         component: RolesComponent,
+        resolve: {
+          roles: RolesResolver
+        }
       },
     ],
   },

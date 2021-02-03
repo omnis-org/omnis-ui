@@ -26,15 +26,17 @@ export class RoleRenderComponent implements ViewCell, OnInit {
     }
 
     ngOnInit() {
-        this.roleService.getById(this.value)
-            .subscribe({
-                next: data => {
-                    this.renderSubject.next(data.name);
-                },
-                error: error => {
-                    this.alertService.error(error);
-                }
-            });
+
+        const roles = this.roleService.roles;
+
+        const rolesf = roles.filter(role => role.id == this.value);
+
+        if (rolesf.length != 0) {
+            this.renderSubject.next(rolesf[0].name);
+        } else {
+            this.alertService.error("No roles found");
+        }
+
     }
 
 }

@@ -24,7 +24,6 @@ export class InterfaceService {
   constructor(private http: HttpClient) {
     this.interfaces_ = new BehaviorSubject<OmnisInterface[]>(null);
     this.interfaces$ = this.interfaces_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get interfaces(): OmnisInterface[] {

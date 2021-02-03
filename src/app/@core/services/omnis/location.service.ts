@@ -25,8 +25,6 @@ export class LocationService {
   constructor(private http: HttpClient) {
     this.locations_ = new BehaviorSubject<OmnisLocation[]>(null);
     this.locations$ = this.locations_.asObservable();
-    // when the class is first called, fetch all data from api
-    this.getAll().subscribe();
   }
 
   public get locations(): OmnisLocation[] {

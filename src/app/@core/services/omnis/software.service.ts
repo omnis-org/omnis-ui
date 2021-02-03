@@ -24,7 +24,6 @@ export class SoftwareService {
   constructor(private http: HttpClient) {
     this.softwares_ = new BehaviorSubject<OmnisSoftware[]>(null);
     this.softwares$ = this.softwares_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get softwares(): OmnisSoftware[] {

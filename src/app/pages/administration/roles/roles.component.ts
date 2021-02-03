@@ -102,18 +102,7 @@ export class RolesComponent {
     private alertService: AlertService) { }
 
   ngOnInit() {
-    // only with activated when implemented
-    this.roleService.getAll().subscribe(
-      {
-        next: roles => {
-          this.source.load(roles);
-        },
-        error: error => {
-          this.alertService.error(error);
-        }
-      }
-    );
-
+    this.source.load(this.roleService.roles);
     this.settings.actions.add = this.accountService.role.rolesInsertPermission;
     this.settings.actions.edit = this.accountService.role.rolesUpdatePermission;
     this.settings.actions.delete = this.accountService.role.rolesDeletePermission;

@@ -24,7 +24,6 @@ export class OperatingSystemService {
   constructor(private http: HttpClient) {
     this.operatingSystems_ = new BehaviorSubject<OmnisOperatingSystem[]>(null);
     this.operatingSystems$ = this.operatingSystems_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get operatingSystems(): OmnisOperatingSystem[] {
