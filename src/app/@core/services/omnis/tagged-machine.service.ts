@@ -24,7 +24,6 @@ export class TaggedMachineService {
   constructor(private http: HttpClient) {
     this.taggedMachines_ = new BehaviorSubject<OmnisTaggedMachine[]>(null);
     this.taggedMachines$ = this.taggedMachines_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get taggedMachines(): OmnisTaggedMachine[] {

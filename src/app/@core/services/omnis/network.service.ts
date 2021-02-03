@@ -24,8 +24,6 @@ export class NetworkService {
   constructor(private http: HttpClient) {
     this.networks_ = new BehaviorSubject<OmnisNetwork[]>(null);
     this.networks$ = this.networks_.asObservable();
-    // when the class is first called, fetch all data from api
-    this.getAll().subscribe();
   }
 
   public get networks(): OmnisNetwork[] {

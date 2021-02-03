@@ -24,7 +24,6 @@ export class TagService {
   constructor(private http: HttpClient) {
     this.tags_ = new BehaviorSubject<OmnisTag[]>(null);
     this.tags$ = this.tags_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get tags(): OmnisTag[] {

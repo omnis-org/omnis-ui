@@ -24,7 +24,6 @@ export class GatewayService {
   constructor(private http: HttpClient) {
     this.gateways_ = new BehaviorSubject<OmnisGateway[]>(null);
     this.gateways$ = this.gateways_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get gateways(): OmnisGateway[] {

@@ -97,7 +97,12 @@ export class AccountService {
     }
 
     getAll() {
-        return this.http.get<User[]>(`${environment.adminApiUrl}/users`);
+        return this.http.get<User[]>(`${environment.adminApiUrl}/users`).pipe(map(users => {
+            users.forEach((_, i) => {
+                users[i].password = '';
+            });
+            return users;
+        }));
     }
 
     getById(id: string) {

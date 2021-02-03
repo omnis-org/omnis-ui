@@ -24,7 +24,6 @@ export class InstalledSoftwareService {
   constructor(private http: HttpClient) {
     this.installedSoftwares_ = new BehaviorSubject<OmnisInstalledSoftware[]>(null);
     this.installedSoftwares$ = this.installedSoftwares_.asObservable();
-    this.getAll().subscribe(); // when the class is first called, fetch all data from api
   }
 
   public get installedSoftwares(): OmnisInstalledSoftware[] {

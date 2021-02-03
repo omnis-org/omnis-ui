@@ -7,6 +7,8 @@
  */
 
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Role, User } from '@app/@core/models';
 import { AlertService, AccountService, RoleService } from '@core/services';
 import { LocalDataSource } from 'ng2-smart-table';
 import { PasswordEditorComponent } from './password-editor/password-editor.component';
@@ -84,29 +86,23 @@ export class UsersComponent {
     }
   };
 
+  listRole: { value: number, title: string }[] = []
+
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(public accountService: AccountService, private roleService: RoleService, private alertService: AlertService) { }
+  constructor(private route: ActivatedRoute, public accountService: AccountService, private alertService: AlertService) { }
 
   ngOnInit() {
     // only with activated when implemented
-    this.accountService.getAll().subscribe(users => {
-      users.forEach((_, i) => {
-        users[i].password = '';
+    this.listRole = [];
+    this.route.data.subscribe((data: { users: User[], roles: Role[] }) => {
+      this.source.load(data.users);
+
+      data.roles.forEach((v, _) => {
+        this.listRole.push({ value: v.id, title: v.name });
       });
-      this.source.load(users);
-    });
-
-    const listRole = [];
-
-    this.roleService.getAll().subscribe(roles => {
-      roles.forEach((v, _) => {
-        listRole.push({ value: v.id, title: v.name });
-      });
-      this.settings.columns.roleId.editor.config.list = listRole;
-      this.settings = Object.assign({}, this.settings);
-    });
-
+      this.settings.columns.roleId.editor.config.list = this.listRole;
+    })
 
     this.settings.actions.add = this.accountService.role.usersInsertPermission;
     this.settings.actions.edit = this.accountService.role.usersUpdatePermission;
