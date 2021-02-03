@@ -95,7 +95,11 @@ export class MachineService {
   }
 
   authorize(id: string | number) {
-    return this.http.patch<any>(`${environment.adminUrl}/pending_machine/${id}/authorize`, null);
+    return this.http.patch<any>(`${environment.adminUrl}/pending_machine/${id}/authorize`, null).pipe(
+      tap(_ => {
+        this.getAll().subscribe();
+      })
+    );
   }
 
   unauthorize(id: string | number) {
