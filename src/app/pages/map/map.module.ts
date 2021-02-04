@@ -7,7 +7,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbSidebarModule, NbToggleModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbPopoverModule, NbSidebarModule, NbToggleModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { NetworkMapComponent } from './network-map/network-map.component';
@@ -16,6 +16,7 @@ import { SlideOutComponent } from './slide-out/slide-out.component';
 import { DetailsComponent } from './details/details-component';
 import { NetworkDetailsComponent } from './details/network/network-details.component';
 import { MachineDetailsComponent } from './details/machine/machine-details.component';
+import { OsDetailsComponent } from './details/os-details/os-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbSelectModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
@@ -32,13 +33,15 @@ import { FormsModule } from '@angular/forms';
     NbToggleModule,
     FormsModule,
     NbSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NbPopoverModule
   ],
   exports: [],
   declarations: [
     SlideOutComponent,
     NetworkDetailsComponent,
     MachineDetailsComponent,
+    OsDetailsComponent,
     DetailsComponent,
     MapComponent,
     NetworkMapComponent
