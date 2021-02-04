@@ -1,0 +1,9 @@
+<img *ngIf="osDisplayed !== undefined" [src]="displayedImagePath" [nbPopover]="templateRef" nbPopoverTrigger="hint" nbPopoverPlacement="bottom">
+<ng-template #templateRef>
+    <ul>
+        <li>Platform : {{osDisplayed.platform}} </li>
+        <li>Family : {{osDisplayed.platformFamily}} </li>
+        <li>Version : {{osDisplayed.platformVersion}} </li>
+        <li>Kernel : {{osDisplayed.kernelVersion}} </li>
+    </ul>  
+  </ng-template>
