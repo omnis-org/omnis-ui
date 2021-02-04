@@ -15,7 +15,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { MapComponent } from './map/map.component';
 import { PendingMachinesComponent } from './pending-machines/pending-machines.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { MachinesResolver, PerimetersResolver, NetworksResolver, InterfacesResolver, GatewaysResolver, LocationsResolver } from '@core/resolver';
+import { MachinesResolver, PerimetersResolver, NetworksResolver, InterfacesResolver, GatewaysResolver, LocationsResolver, OperatingSystemsResolver } from '@core/resolver';
 
 
 
@@ -41,7 +41,8 @@ const routes: Routes = [{
         interfaces: InterfacesResolver,
         gateways: GatewaysResolver,
         perimeters: PerimetersResolver,
-        locations: LocationsResolver
+        locations: LocationsResolver,
+        operatingSystems: OperatingSystemsResolver
       }
     },
     {
