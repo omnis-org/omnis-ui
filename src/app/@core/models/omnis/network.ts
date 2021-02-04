@@ -6,9 +6,9 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
-import { Time } from "@angular/common";
-
-export class OmnisNetwork {
+import { Serializable } from '../serializable';
+import { verifDateOutdated } from "@core/utils/date";
+export class OmnisNetwork extends Serializable {
     id: number;
     name: string;
     ipv4: string;
@@ -16,10 +16,35 @@ export class OmnisNetwork {
     isDmz: boolean;
     hasWifi: boolean;
     perimeterId: number;
-    nameLastModification: Time;
-    ipv4LastModification: Time;
-    ipv4MaskLastModification: Time;
-    isDmzLastModification: Time;
-    hasWifiLastModification: Time;
-    perimeterIdLastModification: Time;
+    nameLastModification: Date;
+    ipv4LastModification: Date;
+    ipv4MaskLastModification: Date;
+    isDmzLastModification: Date;
+    hasWifiLastModification: Date;
+    perimeterIdLastModification: Date;
+
+    getOutdatedAttribute(day: number) {
+        var outdatedAttributes = [];
+
+        if (verifDateOutdated(day, this.nameLastModification)) {
+            outdatedAttributes.push({ name: "name", value: this.name, date: this.nameLastModification });
+        }
+        if (verifDateOutdated(day, this.ipv4LastModification)) {
+            outdatedAttributes.push({ name: "ipv4", value: this.ipv4, date: this.ipv4LastModification });
+        }
+        if (verifDateOutdated(day, this.ipv4MaskLastModification)) {
+            outdatedAttributes.push({ name: "ipv4Mask", value: this.ipv4Mask, date: this.ipv4MaskLastModification });
+        }
+        if (verifDateOutdated(day, this.isDmzLastModification)) {
+            outdatedAttributes.push({ name: "isDmz", value: this.isDmz, date: this.isDmzLastModification });
+        }
+        if (verifDateOutdated(day, this.hasWifiLastModification)) {
+            outdatedAttributes.push({ name: "hasWifi", value: this.hasWifi, date: this.hasWifiLastModification });
+        }
+        if (verifDateOutdated(day, this.perimeterIdLastModification)) {
+            outdatedAttributes.push({ name: "perimeterId", value: this.perimeterId, date: this.perimeterIdLastModification });
+        }
+
+        return outdatedAttributes;
+    }
 }

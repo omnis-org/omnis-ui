@@ -6,12 +6,25 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
-import { Time } from "@angular/common";
-
-export class OmnisTaggedMachine {
+import { Serializable } from '../serializable';
+import { verifDateOutdated } from "@core/utils/date";
+export class OmnisTaggedMachine extends Serializable {
     id: number;
     tagId: number;
     machineId: number;
-    tagIdLastModification: Time;
-    machineIdLastModification: Time;
+    tagIdLastModification: Date;
+    machineIdLastModification: Date;
+
+    getOutdatedAttribute(day: number) {
+        var outdatedAttributes = [];
+
+        if (verifDateOutdated(day, this.tagIdLastModification)) {
+            outdatedAttributes.push({ name: "tagId", value: this.tagId, date: this.tagIdLastModification });
+        }
+        if (verifDateOutdated(day, this.machineIdLastModification)) {
+            outdatedAttributes.push({ name: "machineId", value: this.machineId, date: this.machineIdLastModification });
+        }
+
+        return outdatedAttributes;
+    }
 }
