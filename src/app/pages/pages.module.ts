@@ -16,6 +16,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { MapModule } from './map/map.module';
 import { PendingMachinesModule } from './pending-machines/pending-machines.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { PendingMachinesModule } from './pending-machines/pending-machines.modul
     NbMenuModule,
     DashboardModule,
     MapModule,
+    NotificationsModule,
     PendingMachinesModule,
     MiscellaneousModule,
   ],
