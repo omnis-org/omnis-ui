@@ -6,12 +6,25 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
-import { Time } from "@angular/common";
-
-export class OmnisLocation {
+import { Serializable } from '../serializable';
+import { verifDateOutdated } from "@core/utils/date";
+export class OmnisLocation extends Serializable {
     id: number;
     name: string;
     description: string;
-    nameLastModification: Time;
-    descriptionLastModification: Time;
+    nameLastModification: Date;
+    descriptionLastModification: Date;
+
+    getOutdatedAttribute(day: number) {
+        var outdatedAttributes = [];
+
+        if (verifDateOutdated(day, this.nameLastModification)) {
+            outdatedAttributes.push({ name: "name", value: this.name, date: this.nameLastModification });
+        }
+        if (verifDateOutdated(day, this.descriptionLastModification)) {
+            outdatedAttributes.push({ name: "description", value: this.description, date: this.descriptionLastModification });
+        }
+
+        return outdatedAttributes;
+    }
 }
