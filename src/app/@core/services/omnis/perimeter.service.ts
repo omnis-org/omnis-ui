@@ -33,7 +33,7 @@ export class PerimeterService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisPerimeter[]>(`${environment.omnisApiUrl}/perimeters`)
+    return this.http.get<OmnisPerimeter[]>(`${environment.omnisRestApiUrl}/perimeters`)
       .pipe(tap((perimeters) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -45,12 +45,12 @@ export class PerimeterService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisPerimeter>(`${environment.omnisApiUrl}/perimeter/${id}`);
+    return this.http.get<OmnisPerimeter>(`${environment.omnisRestApiUrl}/perimeter/${id}`);
   }
 
   update(perimeter: OmnisPerimeter) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/perimeter/${perimeter.id}`, perimeter)
+    return this.http.patch(`${environment.omnisRestApiUrl}/perimeter/${perimeter.id}`, perimeter)
       .pipe(tap(_ => {
         const perimeters = this.perimeters; // get current local array state
         const perimeterToUpdate = perimeters.find(m => m.id === perimeter.id); // find object to update
@@ -62,7 +62,7 @@ export class PerimeterService {
 
   insert(perimeter: OmnisPerimeter) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisPerimeter>(`${environment.omnisApiUrl}/perimeter`, perimeter)
+    return this.http.post<OmnisPerimeter>(`${environment.omnisRestApiUrl}/perimeter`, perimeter)
       .pipe(tap(perimeter => {
         const perimeters = this.perimeters; // get current local array state
         perimeters.push(perimeter); // update the local array
@@ -72,7 +72,7 @@ export class PerimeterService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/perimeter/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/perimeter/${id}`)
       .pipe(tap(_ => {
         const perimeters = this.perimeters; // get current local array state
         const perimeterToDelete = perimeters.find(m => m.id === id); // find object to delete
@@ -82,7 +82,7 @@ export class PerimeterService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisPerimeter[]>(`${environment.omnisApiUrl}/perimeters/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisPerimeter[]>(`${environment.omnisRestApiUrl}/perimeters/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisPerimeter[] = [];
         itemsjson?.forEach(itemjson => {

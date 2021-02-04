@@ -32,7 +32,7 @@ export class TagService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisTag[]>(`${environment.omnisApiUrl}/tags`)
+    return this.http.get<OmnisTag[]>(`${environment.omnisRestApiUrl}/tags`)
       .pipe(tap((tags) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -44,12 +44,12 @@ export class TagService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisTag>(`${environment.omnisApiUrl}/tag/${id}`);
+    return this.http.get<OmnisTag>(`${environment.omnisRestApiUrl}/tag/${id}`);
   }
 
   update(tag: OmnisTag) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/tag/${tag.id}`, tag)
+    return this.http.patch(`${environment.omnisRestApiUrl}/tag/${tag.id}`, tag)
       .pipe(tap(_ => {
         const tags = this.tags; // get current local array state
         const tagToUpdate = tags.find(m => m.id === tag.id); // find object to update
@@ -61,7 +61,7 @@ export class TagService {
 
   insert(tag: OmnisTag) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisTag>(`${environment.omnisApiUrl}/tag`, tag)
+    return this.http.post<OmnisTag>(`${environment.omnisRestApiUrl}/tag`, tag)
       .pipe(tap(tag => {
         const tags = this.tags; // get current local array state
         tags.push(tag); // update the local array
@@ -71,7 +71,7 @@ export class TagService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/tag/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/tag/${id}`)
       .pipe(tap(_ => {
         const tags = this.tags; // get current local array state
         const tagToDelete = tags.find(m => m.id === id); // find object to delete
@@ -81,7 +81,7 @@ export class TagService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisTag[]>(`${environment.omnisApiUrl}/tags/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisTag[]>(`${environment.omnisRestApiUrl}/tags/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisTag[] = [];
         itemsjson?.forEach(itemjson => {

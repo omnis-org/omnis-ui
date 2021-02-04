@@ -33,7 +33,7 @@ export class LocationService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisLocation[]>(`${environment.omnisApiUrl}/locations`)
+    return this.http.get<OmnisLocation[]>(`${environment.omnisRestApiUrl}/locations`)
       .pipe(tap((locations) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -45,12 +45,12 @@ export class LocationService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisLocation>(`${environment.omnisApiUrl}/location/${id}`);
+    return this.http.get<OmnisLocation>(`${environment.omnisRestApiUrl}/location/${id}`);
   }
 
   update(location: OmnisLocation) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/location/${location.id}`, location)
+    return this.http.patch(`${environment.omnisRestApiUrl}/location/${location.id}`, location)
       .pipe(tap(_ => {
         const locations = this.locations; // get current local array state
         const locationToUpdate = locations.find(m => m.id === location.id); // find object to update
@@ -62,7 +62,7 @@ export class LocationService {
 
   insert(location: OmnisLocation) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisLocation>(`${environment.omnisApiUrl}/location`, location)
+    return this.http.post<OmnisLocation>(`${environment.omnisRestApiUrl}/location`, location)
       .pipe(tap(location => {
         const locations = this.locations; // get current local array state
         locations.push(location); // update the local array
@@ -72,7 +72,7 @@ export class LocationService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/location/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/location/${id}`)
       .pipe(tap(_ => {
         const locations = this.locations; // get current local array state
         const locationToDelete = locations.find(m => m.id === id); // find object to delete
@@ -82,7 +82,7 @@ export class LocationService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisLocation[]>(`${environment.omnisApiUrl}/locations/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisLocation[]>(`${environment.omnisRestApiUrl}/locations/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisLocation[] = [];
         itemsjson?.forEach(itemjson => {
