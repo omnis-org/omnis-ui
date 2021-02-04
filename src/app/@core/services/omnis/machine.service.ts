@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 import { OmnisMachine } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -84,7 +84,17 @@ export class MachineService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisMachine[]>(`${environment.omnisApiUrl}/machines/outdated/${day}`);
+    return this.http.get<OmnisMachine[]>(`${environment.omnisApiUrl}/machines/outdated/${day}`).pipe(map(
+      itemsjson => {
+        var items: OmnisMachine[] = [];
+        itemsjson?.forEach(itemjson => {
+          var item = new OmnisMachine();
+          item.fromJSON(itemjson);
+          items.push(item);
+        })
+        return items;
+      }
+    ));
   }
 
 

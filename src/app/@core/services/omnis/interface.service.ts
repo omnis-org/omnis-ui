@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { OmnisInterface } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -80,7 +80,17 @@ export class InterfaceService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisInterface[]>(`${environment.omnisApiUrl}/interfaces/outdated/${day}`);
+    return this.http.get<OmnisInterface[]>(`${environment.omnisApiUrl}/interfaces/outdated/${day}`).pipe(map(
+      itemsjson => {
+        var items: OmnisInterface[] = [];
+        itemsjson?.forEach(itemjson => {
+          var item = new OmnisInterface();
+          item.fromJSON(itemjson);
+          items.push(item);
+        })
+        return items;
+      }
+    ));
   }
 
   private refreshTimer() {

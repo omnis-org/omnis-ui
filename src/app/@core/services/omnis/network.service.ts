@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { OmnisNetwork } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -83,7 +83,17 @@ export class NetworkService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisNetwork[]>(`${environment.omnisApiUrl}/networks/outdated/${day}`);
+    return this.http.get<OmnisNetwork[]>(`${environment.omnisApiUrl}/networks/outdated/${day}`).pipe(map(
+      itemsjson => {
+        var items: OmnisNetwork[] = [];
+        itemsjson?.forEach(itemjson => {
+          var item = new OmnisNetwork();
+          item.fromJSON(itemjson);
+          items.push(item);
+        })
+        return items;
+      }
+    ));
   }
 
   private refreshTimer() {
