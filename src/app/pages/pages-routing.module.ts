@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { MapComponent } from './map/map.component';
 import { PendingMachinesComponent } from './pending-machines/pending-machines.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 const routes: Routes = [{
@@ -27,6 +28,10 @@ const routes: Routes = [{
     {
       path: 'map',
       component: MapComponent
+    },
+    {
+      path: 'notifications',
+      component: NotificationsComponent
     },
     {
       path: 'pending-machines',

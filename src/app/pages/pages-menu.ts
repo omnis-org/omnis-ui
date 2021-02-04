@@ -13,6 +13,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/map',
   },
   {
+    title: 'Notifications',
+    icon: 'bell-outline',
+    link: '/pages/notifications',
+  },
+  {
     title: 'Pending Machines',
     icon: 'checkmark-square-outline',
     link: '/pages/pending-machines',
