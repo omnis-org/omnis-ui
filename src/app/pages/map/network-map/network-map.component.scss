@@ -9,7 +9,6 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
-
   nb-card-body {
     padding-top: 1.25rem;
   }
@@ -21,8 +20,14 @@
     background-image: radial-gradient(circle, rgb(114, 114, 114) 1px, rgba(0, 0, 0, 0) 1px);
   }
 
+  .selection {
+    display: inline-block;
+    margin-left: 50px;
+    width: 200px;
+  }
+
 }
 
-#network .vis-network:focus {
+#networkMap .vis-network:focus {
   outline: none;
 }

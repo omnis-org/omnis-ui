@@ -1,0 +1,13 @@
+<div class="selection">
+    <nb-select fullWidth multiple shape="round" [size]="'medium'" [placeholder]="'Perimeters'"  (selectedChange)="updateMap()" [(ngModel)]="selectedPerimeters">
+        <nb-option *ngFor="let perimeter of this.perimeters" [value]="perimeter.id">{{perimeter.name}}</nb-option>
+    </nb-select>
+</div>
+
+<div class="selection">
+    <nb-select fullWidth multiple shape="round" [size]="'medium'" [placeholder]="'Locations'"  (selectedChange)="updateMap()" [(ngModel)]="selectedLocations">
+        <nb-option *ngFor="let location of this.locations" [value]="location.id">{{location.name}}</nb-option>
+    </nb-select>
+</div>
+
+<div class="ncharts"  id="networkMap" #networkMap></div>

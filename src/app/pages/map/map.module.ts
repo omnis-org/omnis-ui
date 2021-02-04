@@ -17,6 +17,9 @@ import { DetailsComponent } from './details/details-component';
 import { NetworkDetailsComponent } from './details/network/network-details.component';
 import { MachineDetailsComponent } from './details/machine/machine-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NbSelectModule } from '@nebular/theme';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
@@ -27,6 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbButtonModule,
     NbIconModule,
     NbToggleModule,
+    FormsModule,
+    NbSelectModule,
     ReactiveFormsModule
   ],
   exports: [],
