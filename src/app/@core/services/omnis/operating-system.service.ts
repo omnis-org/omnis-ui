@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { OmnisOperatingSystem } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -82,7 +82,17 @@ export class OperatingSystemService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisOperatingSystem[]>(`${environment.omnisApiUrl}/operatingSystems/outdated/${day}`);
+    return this.http.get<OmnisOperatingSystem[]>(`${environment.omnisApiUrl}/operatingSystems/outdated/${day}`).pipe(map(
+      itemsjson => {
+        var items: OmnisOperatingSystem[] = [];
+        itemsjson?.forEach(itemjson => {
+          var item = new OmnisOperatingSystem();
+          item.fromJSON(itemjson);
+          items.push(item);
+        })
+        return items;
+      }
+    ));
   }
 
   private refreshTimer() {

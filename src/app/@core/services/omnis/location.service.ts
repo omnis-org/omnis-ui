@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { OmnisLocation } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -84,7 +84,17 @@ export class LocationService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisLocation[]>(`${environment.omnisApiUrl}/locations/outdated/${day}`);
+    return this.http.get<OmnisLocation[]>(`${environment.omnisApiUrl}/locations/outdated/${day}`).pipe(map(
+      itemsjson => {
+        var items: OmnisLocation[] = [];
+        itemsjson?.forEach(itemjson => {
+          var item = new OmnisLocation();
+          item.fromJSON(itemjson);
+          items.push(item);
+        })
+        return items;
+      }
+    ));
   }
 
   private refreshTimer() {

@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { OmnisPerimeter } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -84,7 +84,17 @@ export class PerimeterService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisPerimeter[]>(`${environment.omnisApiUrl}/perimeters/outdated/${day}`);
+    return this.http.get<OmnisPerimeter[]>(`${environment.omnisApiUrl}/perimeters/outdated/${day}`).pipe(map(
+      itemsjson => {
+        var items: OmnisPerimeter[] = [];
+        itemsjson?.forEach(itemjson => {
+          var item = new OmnisPerimeter();
+          item.fromJSON(itemjson);
+          items.push(item);
+        })
+        return items;
+      }
+    ));
   }
 
   private refreshTimer() {
