@@ -32,7 +32,7 @@ export class NetworkService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisNetwork[]>(`${environment.omnisApiUrl}/networks`)
+    return this.http.get<OmnisNetwork[]>(`${environment.omnisRestApiUrl}/networks`)
       .pipe(tap((networks) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -44,12 +44,12 @@ export class NetworkService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisNetwork>(`${environment.omnisApiUrl}/network/${id}`);
+    return this.http.get<OmnisNetwork>(`${environment.omnisRestApiUrl}/network/${id}`);
   }
 
   update(network: OmnisNetwork) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/network/${network.id}`, network)
+    return this.http.patch(`${environment.omnisRestApiUrl}/network/${network.id}`, network)
       .pipe(tap(_ => {
         const networks = this.networks; // get current local array state
         const networkToUpdate = networks.find(m => m.id === network.id); // find object to update
@@ -61,7 +61,7 @@ export class NetworkService {
 
   insert(network: OmnisNetwork) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisNetwork>(`${environment.omnisApiUrl}/network`, network)
+    return this.http.post<OmnisNetwork>(`${environment.omnisRestApiUrl}/network`, network)
       .pipe(tap(network => {
         const networks = this.networks; // get current local array state
         networks.push(network); // update the local array
@@ -71,7 +71,7 @@ export class NetworkService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/network/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/network/${id}`)
       .pipe(tap(_ => {
         const networks = this.networks; // get current local array state
         const networkToDelete = networks.find(m => m.id === id); // find object to delete
@@ -81,7 +81,7 @@ export class NetworkService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisNetwork[]>(`${environment.omnisApiUrl}/networks/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisNetwork[]>(`${environment.omnisRestApiUrl}/networks/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisNetwork[] = [];
         itemsjson?.forEach(itemjson => {

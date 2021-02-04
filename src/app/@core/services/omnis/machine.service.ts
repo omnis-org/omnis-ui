@@ -33,7 +33,7 @@ export class MachineService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisMachine[]>(`${environment.omnisApiUrl}/machines`)
+    return this.http.get<OmnisMachine[]>(`${environment.omnisRestApiUrl}/machines`)
       .pipe(tap((machines) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -45,12 +45,12 @@ export class MachineService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisMachine>(`${environment.omnisApiUrl}/machine/${id}`);
+    return this.http.get<OmnisMachine>(`${environment.omnisRestApiUrl}/machine/${id}`);
   }
 
   update(machine: OmnisMachine) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/machine/${machine.id}`, machine)
+    return this.http.patch(`${environment.omnisRestApiUrl}/machine/${machine.id}`, machine)
       .pipe(tap(_ => {
         const machines = this.machines; // get current local array state
         const machineToUpdate = machines.find(m => m.id === machine.id); // find object to update
@@ -62,7 +62,7 @@ export class MachineService {
 
   insert(machine: OmnisMachine) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisMachine>(`${environment.omnisApiUrl}/machine`, machine)
+    return this.http.post<OmnisMachine>(`${environment.omnisRestApiUrl}/machine`, machine)
       .pipe(tap(machine => {
         const machines = this.machines; // get current local array state
         machines.push(machine); // update the local array
@@ -72,7 +72,7 @@ export class MachineService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/machine/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/machine/${id}`)
       .pipe(tap(_ => {
         const machines = this.machines; // get current local array state
         const machineToDelete = machines.find(m => m.id === id); // find object to delete
@@ -82,7 +82,7 @@ export class MachineService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisMachine[]>(`${environment.omnisApiUrl}/machines/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisMachine[]>(`${environment.omnisRestApiUrl}/machines/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisMachine[] = [];
         itemsjson?.forEach(itemjson => {
@@ -99,11 +99,11 @@ export class MachineService {
   // ADMIN
 
   getPendingMachines() {
-    return this.http.get<OmnisMachine[]>(`${environment.adminUrl}/pending_machines/`);
+    return this.http.get<OmnisMachine[]>(`${environment.adminApiUrl}/pending_machines/`);
   }
 
   authorize(id: string | number) {
-    return this.http.patch<any>(`${environment.adminUrl}/pending_machine/${id}/authorize`, null).pipe(
+    return this.http.patch<any>(`${environment.adminApiUrl}/pending_machine/${id}/authorize`, null).pipe(
       tap(_ => {
         this.getAll().subscribe();
       })
@@ -111,7 +111,7 @@ export class MachineService {
   }
 
   unauthorize(id: string | number) {
-    return this.http.patch<any>(`${environment.adminUrl}/pending_machine/${id}/unauthorize`, null);
+    return this.http.patch<any>(`${environment.adminApiUrl}/pending_machine/${id}/unauthorize`, null);
   }
 
   private refreshTimer() {

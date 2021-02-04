@@ -32,7 +32,7 @@ export class GatewayService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisGateway[]>(`${environment.omnisApiUrl}/gateways`)
+    return this.http.get<OmnisGateway[]>(`${environment.omnisRestApiUrl}/gateways`)
       .pipe(tap((gateways) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -44,12 +44,12 @@ export class GatewayService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisGateway>(`${environment.omnisApiUrl}/gateway/${id}`);
+    return this.http.get<OmnisGateway>(`${environment.omnisRestApiUrl}/gateway/${id}`);
   }
 
   update(gtw: OmnisGateway) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/gateway/${gtw.id}`, gtw)
+    return this.http.patch(`${environment.omnisRestApiUrl}/gateway/${gtw.id}`, gtw)
       .pipe(tap(_ => {
         const gateways = this.gateways; // get current local array state
         const gatewayToUpdate = gateways.find(m => m.id === gtw.id); // find object to update
@@ -61,7 +61,7 @@ export class GatewayService {
 
   insert(gtw: OmnisGateway) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisGateway>(`${environment.omnisApiUrl}/gateway`, gtw)
+    return this.http.post<OmnisGateway>(`${environment.omnisRestApiUrl}/gateway`, gtw)
       .pipe(tap(gtw => {
         const gateways = this.gateways; // get current local array state
         gateways.push(gtw); // update the local array
@@ -71,7 +71,7 @@ export class GatewayService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/gateway/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/gateway/${id}`)
       .pipe(tap(_ => {
         const gateways = this.gateways; // get current local array state
         const gatewayToDelete = gateways.find(m => m.id === id); // find object to delete
@@ -81,7 +81,7 @@ export class GatewayService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisGateway[]>(`${environment.omnisApiUrl}/gateways/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisGateway[]>(`${environment.omnisRestApiUrl}/gateways/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisGateway[] = [];
         itemsjson?.forEach(itemjson => {

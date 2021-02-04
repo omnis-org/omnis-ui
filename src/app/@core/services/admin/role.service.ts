@@ -34,7 +34,7 @@ export class RoleService {
 
 
   getAll() {
-    return this.http.get<Role[]>(`${environment.adminApiUrl}/roles`)
+    return this.http.get<Role[]>(`${environment.adminRestApiUrl}/roles`)
       .pipe(tap((roles) => {
         this.roles_.next(roles);
         return roles;
@@ -43,12 +43,12 @@ export class RoleService {
   }
 
   getById(id: number | string): Observable<Role> {
-    return this.http.get<any>(`${environment.adminApiUrl}/role/${id}`);
+    return this.http.get<any>(`${environment.adminRestApiUrl}/role/${id}`);
   }
 
   update(role: Role) {
     this.checkRoleIntegrity(role);
-    return this.http.patch(`${environment.adminApiUrl}/role/${role.id}`, role)
+    return this.http.patch(`${environment.adminRestApiUrl}/role/${role.id}`, role)
       .pipe(tap(_ => {
         const roles = this.roles;
         const roleToUpdate = roles.find(m => m.id === role.id);
@@ -60,7 +60,7 @@ export class RoleService {
 
   insert(role: Role) {
     this.checkRoleIntegrity(role);
-    return this.http.post<Role>(`${environment.adminApiUrl}/role`, role)
+    return this.http.post<Role>(`${environment.adminRestApiUrl}/role`, role)
       .pipe(tap(gtw => {
         const roles = this.roles;
         roles.push(gtw);
@@ -69,7 +69,7 @@ export class RoleService {
   }
 
   delete(id: string | number) {
-    return this.http.delete(`${environment.adminApiUrl}/role/${id}`)
+    return this.http.delete(`${environment.adminRestApiUrl}/role/${id}`)
       .pipe(tap(_ => {
         const roles = this.roles;
         const roleToDelete = roles.find(m => m.id === id);

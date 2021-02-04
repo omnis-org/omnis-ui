@@ -2,14 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const serverUrl = 'http://localhost:4200';
+const serverUrl = 'http://localhost:4200/api';
 
 export const environment = {
   production: false,
 
-  omnisApiUrl: `${serverUrl}/api/omnis`,
-  adminApiUrl: `${serverUrl}/api/admin`,
-  adminUrl: `${serverUrl}/server-admin`,
+  omnisRestApiUrl: `${serverUrl}/rest/omnis`,
+  adminRestApiUrl: `${serverUrl}/rest/admin`,
+  adminApiUrl: `${serverUrl}/admin`,
 
   refreshDataTimeout: 60000 // 60 sec
 };

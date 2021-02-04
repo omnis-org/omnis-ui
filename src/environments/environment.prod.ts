@@ -1,11 +1,11 @@
-const serverUrl = 'http://localhost:4200';
+const serverUrl = 'http://localhost:4200/api';
 
 export const environment = {
   production: true,
 
-  omnisApiUrl: `${serverUrl}/api/omnis`,
-  adminApiUrl: `${serverUrl}/api/admin`,
-  adminUrl: `${serverUrl}/server-admin`,
+  omnisRestApiUrl: `${serverUrl}/rest/omnis`,
+  adminRestApiUrl: `${serverUrl}/rest/admin`,
+  adminApiUrl: `${serverUrl}/admin`,
 
   refreshDataTimeout: 60000 // 60 sec
 };

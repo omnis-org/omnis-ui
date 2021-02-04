@@ -32,7 +32,7 @@ export class TaggedMachineService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisTaggedMachine[]>(`${environment.omnisApiUrl}/taggedMachines`)
+    return this.http.get<OmnisTaggedMachine[]>(`${environment.omnisRestApiUrl}/taggedMachines`)
       .pipe(tap((taggedMachines) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -44,12 +44,12 @@ export class TaggedMachineService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisTaggedMachine>(`${environment.omnisApiUrl}/taggedMachine/${id}`);
+    return this.http.get<OmnisTaggedMachine>(`${environment.omnisRestApiUrl}/taggedMachine/${id}`);
   }
 
   update(taggedMachine: OmnisTaggedMachine) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/taggedMachine/${taggedMachine.id}`, taggedMachine)
+    return this.http.patch(`${environment.omnisRestApiUrl}/taggedMachine/${taggedMachine.id}`, taggedMachine)
       .pipe(tap(_ => {
         const taggedMachines = this.taggedMachines; // get current local array state
         const taggedMachineToUpdate = taggedMachines.find(m => m.id === taggedMachine.id); // find object to update
@@ -61,7 +61,7 @@ export class TaggedMachineService {
 
   insert(taggedMachine: OmnisTaggedMachine) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisTaggedMachine>(`${environment.omnisApiUrl}/taggedMachine`, taggedMachine)
+    return this.http.post<OmnisTaggedMachine>(`${environment.omnisRestApiUrl}/taggedMachine`, taggedMachine)
       .pipe(tap(taggedMachine => {
         const taggedMachines = this.taggedMachines; // get current local array state
         taggedMachines.push(taggedMachine); // update the local array
@@ -71,7 +71,7 @@ export class TaggedMachineService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/taggedMachine/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/taggedMachine/${id}`)
       .pipe(tap(_ => {
         const taggedMachines = this.taggedMachines; // get current local array state
         const taggedMachineToDelete = taggedMachines.find(m => m.id === id); // find object to delete
@@ -81,7 +81,7 @@ export class TaggedMachineService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisTaggedMachine[]>(`${environment.omnisApiUrl}/taggedMachines/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisTaggedMachine[]>(`${environment.omnisRestApiUrl}/taggedMachines/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisTaggedMachine[] = [];
         itemsjson?.forEach(itemjson => {

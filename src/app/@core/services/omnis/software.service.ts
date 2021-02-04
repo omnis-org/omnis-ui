@@ -32,7 +32,7 @@ export class SoftwareService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisSoftware[]>(`${environment.omnisApiUrl}/softwares`)
+    return this.http.get<OmnisSoftware[]>(`${environment.omnisRestApiUrl}/softwares`)
       .pipe(tap((softwares) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -44,12 +44,12 @@ export class SoftwareService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisSoftware>(`${environment.omnisApiUrl}/software/${id}`);
+    return this.http.get<OmnisSoftware>(`${environment.omnisRestApiUrl}/software/${id}`);
   }
 
   update(software: OmnisSoftware) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/software/${software.id}`, software)
+    return this.http.patch(`${environment.omnisRestApiUrl}/software/${software.id}`, software)
       .pipe(tap(_ => {
         const softwares = this.softwares; // get current local array state
         const softwareToUpdate = softwares.find(m => m.id === software.id); // find object to update
@@ -61,7 +61,7 @@ export class SoftwareService {
 
   insert(software: OmnisSoftware) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisSoftware>(`${environment.omnisApiUrl}/software`, software)
+    return this.http.post<OmnisSoftware>(`${environment.omnisRestApiUrl}/software`, software)
       .pipe(tap(software => {
         const softwares = this.softwares; // get current local array state
         softwares.push(software); // update the local array
@@ -71,7 +71,7 @@ export class SoftwareService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/software/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/software/${id}`)
       .pipe(tap(_ => {
         const softwares = this.softwares; // get current local array state
         const softwareToDelete = softwares.find(m => m.id === id); // find object to delete
@@ -81,7 +81,7 @@ export class SoftwareService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisSoftware[]>(`${environment.omnisApiUrl}/softwares/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisSoftware[]>(`${environment.omnisRestApiUrl}/softwares/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisSoftware[] = [];
         itemsjson?.forEach(itemjson => {

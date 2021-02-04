@@ -32,7 +32,7 @@ export class OperatingSystemService {
 
   getAll() {
     // get all obects from api
-    return this.http.get<OmnisOperatingSystem[]>(`${environment.omnisApiUrl}/operatingSystems`)
+    return this.http.get<OmnisOperatingSystem[]>(`${environment.omnisRestApiUrl}/operatingSystems`)
       .pipe(tap((operatingSystems) => {
         // update behaviorSubject object everytime the getAll function is called,
         // this is what makes the real time update work
@@ -44,12 +44,12 @@ export class OperatingSystemService {
   }
 
   getById(id: number) {
-    return this.http.get<OmnisOperatingSystem>(`${environment.omnisApiUrl}/operatingSystem/${id}`);
+    return this.http.get<OmnisOperatingSystem>(`${environment.omnisRestApiUrl}/operatingSystem/${id}`);
   }
 
   update(operatingSystem: OmnisOperatingSystem) {
     // update database entries using rest api
-    return this.http.patch(`${environment.omnisApiUrl}/operatingSystem/${operatingSystem.id}`, operatingSystem)
+    return this.http.patch(`${environment.omnisRestApiUrl}/operatingSystem/${operatingSystem.id}`, operatingSystem)
       .pipe(tap(_ => {
         const operatingSystems = this.operatingSystems; // get current local array state
         const operatingSystemToUpdate = operatingSystems.find(m => m.id === operatingSystem.id); // find object to update
@@ -61,7 +61,7 @@ export class OperatingSystemService {
 
   insert(operatingSystem: OmnisOperatingSystem) {
     // insert new entry in database using rest api
-    return this.http.post<OmnisOperatingSystem>(`${environment.omnisApiUrl}/operatingSystem`, operatingSystem)
+    return this.http.post<OmnisOperatingSystem>(`${environment.omnisRestApiUrl}/operatingSystem`, operatingSystem)
       .pipe(tap(operatingSystem => {
         const operatingSystems = this.operatingSystems; // get current local array state
         operatingSystems.push(operatingSystem); // update the local array
@@ -71,7 +71,7 @@ export class OperatingSystemService {
 
   delete(id: string | number) {
     // delete entry in database using rest api
-    return this.http.delete(`${environment.omnisApiUrl}/operatingSystem/${id}`)
+    return this.http.delete(`${environment.omnisRestApiUrl}/operatingSystem/${id}`)
       .pipe(tap(_ => {
         const operatingSystems = this.operatingSystems; // get current local array state
         const operatingSystemToDelete = operatingSystems.find(m => m.id === id); // find object to delete
@@ -81,7 +81,7 @@ export class OperatingSystemService {
   }
 
   getOutdateds(day: number) {
-    return this.http.get<OmnisOperatingSystem[]>(`${environment.omnisApiUrl}/operatingSystems/outdated/${day}`).pipe(map(
+    return this.http.get<OmnisOperatingSystem[]>(`${environment.omnisRestApiUrl}/operatingSystems/outdated/${day}`).pipe(map(
       itemsjson => {
         var items: OmnisOperatingSystem[] = [];
         itemsjson?.forEach(itemjson => {

@@ -60,19 +60,19 @@ export class AccountService {
 
     // check if first connection
     firstConnection() {
-        return this.http.get<any>(`${environment.adminUrl}/first`)
+        return this.http.get<any>(`${environment.adminApiUrl}/first`)
             .pipe(map(res => res.result ? true : false));
     }
 
     login(username, password) {
         password = sha256(password);
-        return this.http.post<UserToken>(`${environment.adminUrl}/login`, { username, password })
+        return this.http.post<UserToken>(`${environment.adminApiUrl}/login`, { username, password })
             .pipe(map(userToken => { this.processUserToken(userToken); }));
     }
 
     // refresh token and launch timer
     refreshToken() {
-        return this.http.get<UserToken>(`${environment.adminUrl}/refresh`, { withCredentials: true })
+        return this.http.get<UserToken>(`${environment.adminApiUrl}/refresh`, { withCredentials: true })
             .pipe(map(userToken => { this.processUserToken(userToken); }));
     }
 
@@ -93,11 +93,11 @@ export class AccountService {
             user.password = null;
         }
         this.checkUserIntegrity(user);
-        return this.http.post<User>(`${environment.adminUrl}/register`, user);
+        return this.http.post<User>(`${environment.adminApiUrl}/register`, user);
     }
 
     getAll() {
-        return this.http.get<User[]>(`${environment.adminApiUrl}/users`).pipe(map(users => {
+        return this.http.get<User[]>(`${environment.adminRestApiUrl}/users`).pipe(map(users => {
             users.forEach((_, i) => {
                 users[i].password = '';
             });
@@ -106,7 +106,7 @@ export class AccountService {
     }
 
     getById(id: string) {
-        return this.http.get<User>(`${environment.adminApiUrl}/user/${id}`);
+        return this.http.get<User>(`${environment.adminRestApiUrl}/user/${id}`);
     }
 
     update(id, user: User) {
@@ -118,7 +118,7 @@ export class AccountService {
 
         this.checkUserIntegrity(user);
 
-        return this.http.patch(`${environment.adminUrl}/update/${id}`, user)
+        return this.http.patch(`${environment.adminApiUrl}/update/${id}`, user)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
                 if (id === this.user.id) {
@@ -134,7 +134,7 @@ export class AccountService {
     }
 
     delete(id: number) {
-        return this.http.delete(`${environment.adminApiUrl}/user/${id}`)
+        return this.http.delete(`${environment.adminRestApiUrl}/user/${id}`)
             .pipe(tap(_ => {
                 // auto logout if the logged in user deleted their own record
                 if (id === this.user.id) {
