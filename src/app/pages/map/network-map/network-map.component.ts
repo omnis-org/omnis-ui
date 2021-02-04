@@ -9,40 +9,58 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
-import { OmnisMachine, OmnisNetwork, OmnisInterface } from '../../../@core/models/omnis';
-import { MachineService, InterfaceService, NetworkService, GatewayService } from '../../../@core/services/omnis';
+import { OmnisMachine, OmnisNetwork, OmnisInterface, OmnisPerimeter, OmnisLocation } from '@core/models/omnis';
+import { MachineService, InterfaceService, NetworkService, GatewayService, PerimeterService, LocationService } from '@core/services/omnis';
 import { ElementRef, ViewChild } from '@angular/core';
-
 
 @Component({
   selector: 'app-network-map',
   styleUrls: ['./network-map.component.scss'],
-  template: `<div class="ncharts" id="network" #network></div>`,
+  templateUrl: './network-map.component.html'
 })
 export class NetworkMapComponent {
+  //////////////// MAP ////////////////
+  @ViewChild('networkMap') nwEl: ElementRef;
+  private networkMap: any;
 
-  @ViewChild('network') nwEl: ElementRef;
-  @Output() objectEvent = new EventEmitter<any>();
-  @Output() typeObjectEvent = new EventEmitter<string>();
+  //////////////// OUTPUT ////////////////
+  @Output() objectEvent = new EventEmitter<any>(); // select object
+  @Output() typeObjectEvent = new EventEmitter<string>(); // select type object
 
-  //a local instance of machines
+  //////////////// LOCAL DATA ////////////////
   machines: OmnisMachine[];
   networks: OmnisNetwork[];
+  perimeters: OmnisPerimeter[];
+  locations: OmnisLocation[];
 
-  private network: any;
+  //////////////// SELECTED ////////////////
+  public selectedPerimeters: number[] = [];
+  public selectedLocations: number[] = [];
 
   constructor(
     private machineService: MachineService,
     private networkService: NetworkService,
     private interfaceService: InterfaceService,
-    private gatewayService: GatewayService
-  ) { }
+    private gatewayService: GatewayService,
+    public perimeterService: PerimeterService,
+    public locationService: LocationService
+  ) {
+    this.perimeters = this.perimeterService.perimeters;
+    this.locations = this.locationService.locations;
+    this.selectedPerimeters = [1];
+    this.selectedLocations = [1];
+  }
+
+
+  updateMap() {
+    this.updateNodes(this.machineService.machines, 'client');
+    this.updateEdges(this.interfaceService.interfaces);
+    this.updateNodes(this.networkService.networks, 'network');
+  }
 
   ngAfterViewInit(): void {
-    this.network = new Network(
-      this.nwEl.nativeElement,
-      null,
-      this.initOptions()
+    this.networkMap = new Network(
+      this.nwEl.nativeElement, null, this.initOptions()
     );
 
     this.initEvents();
@@ -56,7 +74,7 @@ export class NetworkMapComponent {
     /**
      * When click
      */
-    this.network.on('click', (params) => {
+    this.networkMap.on('click', (params) => {
       if (typeof params.nodes != undefined && params.nodes.length === 1) {
         const objectRawID = params.nodes[0];
         const objectType = this.visidToType(objectRawID);
@@ -73,7 +91,7 @@ export class NetworkMapComponent {
        * If double click on blank -> create a node
        */
     });
-    this.network.on('doubleClick', (params) => {
+    this.networkMap.on('doubleClick', (params) => {
       const nodesLen = params.nodes.length;
       const edgesLen = params.edges.length;
 
@@ -92,13 +110,8 @@ export class NetworkMapComponent {
    * Subscribe to data services
    */
   subscribe(): void {
-    this.updateNodes(this.machineService.machines, 'client');
-    this.updateEdges(this.interfaceService.interfaces);
-    this.updateNodes(this.networkService.networks, 'network');
-
-    this.gatewayService.gateways$.subscribe();
-    this.machineService.machines$.subscribe(machines => { this.updateNodes(machines, 'client'); this.machines = machines; });
-    this.networkService.networks$.subscribe(networks => { this.updateNodes(networks, 'network'); this.networks = networks; });
+    this.machineService.machines$.subscribe(machines => { this.machines = machines; this.updateNodes(machines, 'client'); });
+    this.networkService.networks$.subscribe(networks => { this.networks = networks; this.updateNodes(networks, 'network'); });
     this.interfaceService.interfaces$.subscribe(interfaces => this.updateEdges(interfaces));
   }
 
@@ -106,8 +119,6 @@ export class NetworkMapComponent {
     if (data == null) { return; }
 
     const nodesCurr = this.getNetworkNodes();
-    const nodesCurrIds = nodesCurr.getIds();
-    const nodesCurrIdsFiltered = nodesCurrIds.filter((id: string) => this.visidToType(id) === type);
 
     // compute new nodes ids
     const nodesNewIds = [];
@@ -116,37 +127,61 @@ export class NetworkMapComponent {
         this.idToVisid(item.id, type)
       );
     });
-
-    // remove nodes that no longer exist
-    const nodesToDel = nodesCurrIdsFiltered.filter(item => nodesNewIds.indexOf(item) < 0);
-    nodesCurr.remove(nodesToDel);
-
-    // add/modify new/existants nodes from current type
+    // add/modify new/existants nodes from curritemsent type
     const nodesNew = [];
     data.forEach((item: any) => {
       // compute label
       let label: string;
       if (item.label) {
-        label = item.label;
+        label = item.label
       } else if (item.name) {
-        label = item.name;
+        label = item.name
       }
-
-      nodesNew.push({
-        group: type,
-        id: this.idToVisid(item.id, type),
-        label,
-      });
+      if (type == 'network') {
+        label = label + '\n' + item.ipv4 + '/' + item.ipv4Mask;
+      }
+      if ((this.selectedPerimeters != undefined) && (this.selectedPerimeters.length != 0) && (this.selectedPerimeters.includes(item.perimeterId))) {
+        nodesNew.push({
+          group: type,
+          id: this.idToVisid(item.id, type),
+          label,
+          margin: { top: 70, right: 0, bottom: -40, left: 0 }
+        });
+      }
     });
 
     nodesCurr.update(nodesNew);
-    this.network.setData({ nodes: nodesCurr, edges: this.getNetworkEdges() });
+    // remove nodes that no longer exist
+    let nodesCurrIds = nodesCurr.getIds();
+    let nodesCurrIdsFiltered = nodesCurrIds.filter((id: string) => this.visidToType(id) === type);
+    let nodesToDel = nodesCurrIdsFiltered.filter(item => nodesNewIds.indexOf(item) < 0);
+    nodesCurr.remove(nodesToDel);
+    nodesCurrIds = nodesCurr.getIds();
+    nodesCurrIdsFiltered = nodesCurrIds.filter((id: string) => this.visidToType(id) === type);
+    if ((this.selectedPerimeters != undefined) && (this.selectedLocations != undefined)) {
+      if (type == 'client') {
+        let machinesToDisplay = this.machines.filter(machine => (this.selectedPerimeters.includes(machine.perimeterId) && this.selectedLocations.includes(machine.locationId)))
+        let machinesNotSelected = this.machines.filter(machine => nodesCurrIdsFiltered.includes(this.idToVisid(machine.id, 'client')) && !machinesToDisplay.includes(machine));
+        let clientToDelete = []
+        machinesNotSelected.forEach((item: any) => {
+          clientToDelete.push(this.idToVisid(item.id, 'client'));
+        })
+        nodesCurr.remove(clientToDelete)
+      } else if (type == 'network') {
+        let networkNotInPerimeters = this.networks.filter(network => !this.selectedPerimeters.includes(network.perimeterId))
+        let networkToDelete = []
+        networkNotInPerimeters.forEach((item: any) => {
+          networkToDelete.push(this.idToVisid(item.id, 'network'));
+        })
+        nodesCurr.remove(networkToDelete);
+      }
+    }
+    this.networkMap.setData({ nodes: nodesCurr, edges: this.getNetworkEdges() });
   }
 
   updateEdges(interfaces: OmnisInterface[]): void {
     if (interfaces == null) { return; }
     const networkEdges = [];
-
     interfaces.forEach((interf: OmnisInterface) => {
       networkEdges.push({
         from: this.idToVisid(interf.machineId, 'client'),
@@ -155,7 +190,7 @@ export class NetworkMapComponent {
     });
 
     const dataset = new DataSet<any>(networkEdges);
-    this.network.setData({ nodes: this.getNetworkNodes(), edges: dataset });
+    this.networkMap.setData({ nodes: this.getNetworkNodes(), edges: dataset });
   }
 
   /**
@@ -171,7 +206,7 @@ export class NetworkMapComponent {
       const node = nodes.get(id);
       nodesNew[id] = {};
       nodesNew[id].label = node.label;
-      nodesNew[id].to = this.network.getConnectedNodes(id, 'to');
+      nodesNew[id].to = this.networkMap.getConnectedNodes(id, 'to');
     });
 
     return JSON.stringify(nodesNew, undefined, 2);
@@ -190,7 +225,7 @@ export class NetworkMapComponent {
       edges: this.getEdgeData(inputData),
     };
 
-    this.network.setData(data);
+    this.networkMap.setData(data);
   }
 
   /**
@@ -238,7 +273,7 @@ export class NetworkMapComponent {
    */
   initOptions() {
     return {
-      physics: false,
+      physics: true,
       locale: 'fr',
       interaction: { hover: true },
       manipulation: {
@@ -246,7 +281,7 @@ export class NetworkMapComponent {
       },
       nodes: {
         shape: 'dot',
-        size: 20,
+        size: 30,
         color: '#5e5e5e',
       },
       edges: {},
@@ -263,7 +298,7 @@ export class NetworkMapComponent {
             face: '\'Font Awesome 5 Free\'',
             weight: '900',
             code: '\uf109',
-            size: 50,
+            size: 30,
             color: '#5e5e5e',
           }
         },
@@ -272,8 +307,8 @@ export class NetworkMapComponent {
           icon: {
             face: '\'Font Awesome 5 Free\'',
             weight: '900',
-            code: '\uf233',
-            size: 50,
+            code: '\uf6ff',
+            size: 30,
             color: '#5e5e5e',
           }
         }
@@ -294,11 +329,11 @@ export class NetworkMapComponent {
   }
 
   private getNetworkNodes(): DataSet<any> {
-    return this.network.body.data.nodes;
+    return this.networkMap.body.data.nodes;
   }
 
   private getNetworkEdges(): DataSet<any> {
-    return this.network.body.data.edges;
+    return this.networkMap.body.data.edges;
   }
 
 }
