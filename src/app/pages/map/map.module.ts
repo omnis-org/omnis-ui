@@ -7,7 +7,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbPopoverModule, NbSidebarModule, NbToggleModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbListModule, NbPopoverModule, NbSidebarModule, NbToggleModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { NetworkMapComponent } from './network-map/network-map.component';
@@ -27,6 +27,7 @@ import { OmnisVersionComponent } from './details/omnis-version/omnis-version.com
     NbLayoutModule,
     ThemeModule,
     NbCardModule,
+    NbListModule,
     NbSidebarModule,
     NbButtonModule,
     NbIconModule,
