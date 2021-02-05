@@ -1,0 +1,6 @@
+<img *ngIf="omnisVersion !== undefined" [src]="omnisImage" [nbPopover]="templateRef" nbPopoverTrigger="hint" nbPopoverPlacement="bottom">
+<ng-template #templateRef>
+    <ul>
+        <li>Omnis Version : {{omnisVersion}} </li>
+    </ul>  
+  </ng-template>

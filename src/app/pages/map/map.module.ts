@@ -20,7 +20,7 @@ import { OsDetailsComponent } from './details/os-details/os-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbSelectModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
-
+import { OmnisVersionComponent } from './details/omnis-version/omnis-version.component';
 
 @NgModule({
   imports: [
@@ -43,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     MachineDetailsComponent,
     OsDetailsComponent,
     DetailsComponent,
+    OmnisVersionComponent,
     MapComponent,
     NetworkMapComponent
   ],
