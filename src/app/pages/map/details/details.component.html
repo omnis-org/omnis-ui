@@ -3,6 +3,7 @@
     <h4>
         {{type | titlecase}} {{object.id}}
         <app-os-details *ngIf="isMachine" [osId]=object.operatingSystemId ></app-os-details>
+        <app-omnis-version *ngIf="isMachine" [omnisVersion]=object.omnisVersion></app-omnis-version>
     </h4>
     
 </ng-container> 
