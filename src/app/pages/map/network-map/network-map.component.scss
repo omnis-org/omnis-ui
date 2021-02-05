@@ -6,8 +6,7 @@
  * And NOTICE.txt in the project root for notice information.
  */
 
-@import '../../../@theme/styles/themes';
-
+@import 'src/app/@theme/styles/themes';
 @include nb-install-component() {
   nb-card-body {
     padding-top: 1.25rem;
@@ -30,4 +29,6 @@
 
 #networkMap .vis-network:focus {
   outline: none;
+  
 }
+

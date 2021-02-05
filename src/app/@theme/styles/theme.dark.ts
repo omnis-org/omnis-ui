@@ -317,6 +317,6 @@ export const DARK_THEME = {
       tooltipBorderColor: baseThemeVariables.border2,
       tooltipBorderWidth: '1',
       tooltipExtraCss: 'border-radius: 10px; padding: 4px 16px;',
-    },
+    }
   },
 } as NbJSThemeOptions;
