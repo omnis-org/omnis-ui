@@ -63,7 +63,7 @@ export class PendingMachinesComponent {
     this.machineService.getPendingMachines()
       .pipe(first())
       .subscribe(pendingMachines => {
-        this.source.load(pendingMachines);
+        if (pendingMachines) this.source.load(pendingMachines);
       });
 
     if (!this.accountService.role.pendingMachinesUpdatePermission) {
