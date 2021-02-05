@@ -27,20 +27,16 @@ export class OsDetailsComponent implements OnInit {
   }
 
   changeLogo(osId: number){
-    console.log(osId)
-    console.log("CHANGING LOGO")
     this.localOperatingSystems = this.operatingSystemService.operatingSystems;
-    console.log(this.localOperatingSystems);
     this.inputOS = this.localOperatingSystems.filter(os => os.id === osId);
-    console.log(this.inputOS);
     if(this.inputOS.length === 1){
       this.osDisplayed = this.inputOS[0]
-      this.osType = this.inputOS[0].platform;
+      this.osType = this.inputOS[0].name;
     }else{
       this.osType = undefined;
     }
     if(this.osType !== undefined){
-      if(this.osType === 'ubuntu'){
+      if(this.osType === 'linux'){
         this.displayedImagePath = this.linuxImagePath
       }else if(this.osType === 'windows'){
         this.displayedImagePath = this.windowsImagePath
