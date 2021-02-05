@@ -137,15 +137,18 @@ export class NetworkMapComponent {
       } else if (item.name) {
         label = item.name
       }
-      if (type == 'network') {
-        label = label + '\n' + item.ipv4 + '/' + item.ipv4Mask;
-      }
-      if ((this.selectedPerimeters != undefined) && (this.selectedPerimeters.length != 0) && (this.selectedPerimeters.includes(item.perimeterId))) {
+      if(type == 'network'){
+        label = label +'\n' + item.ipv4 + '/' + item.ipv4Mask;
+        nodesNew.push({
+          group: type,
+          id: this.idToVisid(item.id, type),
+          label
+        });
+      }else{
         nodesNew.push({
           group: type,
           id: this.idToVisid(item.id, type),
           label,
-          margin: { top: 70, right: 0, bottom: -40, left: 0 }
         });
       }
     });
@@ -201,14 +204,12 @@ export class NetworkMapComponent {
   export() {
     const nodes = this.getNetworkNodes();
     const nodesNew = {};
-
     nodes.getIds().forEach((id: string) => {
       const node = nodes.get(id);
       nodesNew[id] = {};
       nodesNew[id].label = node.label;
       nodesNew[id].to = this.networkMap.getConnectedNodes(id, 'to');
     });
-
     return JSON.stringify(nodesNew, undefined, 2);
   }
 
@@ -303,14 +304,9 @@ export class NetworkMapComponent {
           }
         },
         network: {
-          shape: 'icon',
-          icon: {
-            face: '\'Font Awesome 5 Free\'',
-            weight: '900',
-            code: '\uf6ff',
-            size: 30,
-            color: '#5e5e5e',
-          }
+          shape: 'image',
+          image: 'assets/img/network-sprite.png',
+          size: 20
         }
       }
     };
