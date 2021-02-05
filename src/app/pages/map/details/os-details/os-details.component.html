@@ -1,9 +1,13 @@
-<img *ngIf="osDisplayed !== undefined" [src]="displayedImagePath" [nbPopover]="templateRef" nbPopoverTrigger="hint" nbPopoverPlacement="bottom">
-<ng-template #templateRef>
-    <ul>
-        <li>Platform : {{osDisplayed.platform}} </li>
-        <li>Family : {{osDisplayed.platformFamily}} </li>
-        <li>Version : {{osDisplayed.platformVersion}} </li>
-        <li>Kernel : {{osDisplayed.kernelVersion}} </li>
-    </ul>  
-  </ng-template>
+<img *ngIf="osDisplayed !== undefined" [src]="displayedImagePath" [nbPopover]="listOSInfos" nbPopoverTrigger="hint" nbPopoverPlacement="bottom">
+
+<ng-template #listOSInfos>
+<nb-card class="margin-bottom-0">
+    <nb-card-header>Operating System Informations</nb-card-header>
+    <nb-list>
+        <nb-list-item>Platform : {{osDisplayed.platform | titlecase}} </nb-list-item>
+        <nb-list-item>Family : {{osDisplayed.platformFamily | titlecase}} </nb-list-item>
+        <nb-list-item>Version : {{osDisplayed.platformVersion | titlecase}} </nb-list-item>
+        <nb-list-item>Kernel : {{osDisplayed.kernelVersion | titlecase}} </nb-list-item>
+    </nb-list>
+</nb-card>
+</ng-template>

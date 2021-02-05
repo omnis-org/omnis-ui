@@ -1,6 +1,9 @@
-<img *ngIf="omnisVersion !== undefined" [src]="omnisImage" [nbPopover]="templateRef" nbPopoverTrigger="hint" nbPopoverPlacement="bottom">
-<ng-template #templateRef>
-    <ul>
-        <li>Omnis Version : {{omnisVersion}} </li>
-    </ul>  
-  </ng-template>
+<img *ngIf="omnisVersion !== undefined" [src]="omnisImage" [nbPopover]="omnisInfos" nbPopoverTrigger="hint" nbPopoverPlacement="bottom">
+<ng-template #omnisInfos>
+    <nb-card class="margin-bottom-0">
+        <nb-card-header>OmnIS Client Informations</nb-card-header>
+        <nb-list>
+            <nb-list-item>Version : {{omnisVersion}} </nb-list-item>
+        </nb-list>
+    </nb-card>
+</ng-template>
